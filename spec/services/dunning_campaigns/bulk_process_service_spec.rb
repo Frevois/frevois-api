@@ -8,7 +8,7 @@ RSpec.describe DunningCampaigns::BulkProcessService, type: :service, aggregate_f
   let(:currency) { "EUR" }
 
   context "when premium features are enabled" do
-    let(:organization) { create :organization, }
+    let(:organization) { create :organization }
     let(:customer) { create :customer, organization:, currency: }
 
     let(:invoice_1) do
