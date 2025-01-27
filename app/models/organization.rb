@@ -63,9 +63,8 @@ class Organization < ApplicationRecord
   ].freeze
 
   INTEGRATIONS = %w[
-    netsuite okta anrok xero progressive_billing hubspot auto_dunning revenue_analytics salesforce api_permissions revenue_share zero_amount_fees
+    netsuite okta anrok xero progressive_billing hubspot auto_dunning revenue_analytics salesforce api_permissions revenue_share
   ].freeze
-  PREMIUM_INTEGRATIONS = INTEGRATIONS - %w[anrok]
 
   enum :document_numbering, DOCUMENT_NUMBERINGS
 
@@ -91,10 +90,6 @@ class Organization < ApplicationRecord
 
   before_create :set_hmac_key
   after_create :generate_document_number_prefix
-
-  PREMIUM_INTEGRATIONS.each do |premium_integration|
-    scope "with_#{premium_integration}_support", -> { where("? = ANY(premium_integrations)", premium_integration) }
-  end
 
   def admins
     users.joins(:memberships).merge!(memberships.admin)
@@ -137,11 +132,11 @@ class Organization < ApplicationRecord
   end
 
   def auto_dunning_enabled?
-    License.premium? && premium_integrations.include?("auto_dunning")
+    true
   end
 
   def revenue_share_enabled?
-    License.premium? && premium_integrations.include?("revenue_share")
+    true
   end
 
   def reset_customers_last_dunning_campaign_attempt
@@ -204,7 +199,6 @@ end
 #  logo                         :string
 #  name                         :string           not null
 #  net_payment_term             :integer          default(0), not null
-#  premium_integrations         :string           default([]), not null, is an Array
 #  state                        :string
 #  tax_identification_number    :string
 #  timezone                     :string           default("UTC"), not null

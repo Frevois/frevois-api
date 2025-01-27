@@ -23,9 +23,7 @@ describe Clock::RefreshWalletsOngoingBalanceJob, job: true do
     end
 
     context 'when premium' do
-      around { |test| lago_premium!(&test) }
-
-      it 'calls the refresh service' do
+        it 'calls the refresh service' do
         described_class.perform_now
         expect(Wallets::RefreshOngoingBalanceJob).to have_been_enqueued.with(wallet)
       end

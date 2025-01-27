@@ -42,9 +42,7 @@ RSpec.describe DunningCampaigns::CreateService, type: :service, aggregate_failur
     end
 
     context "when lago premium" do
-      around { |test| lago_premium!(&test) }
-
-      context "when no auto_dunning premium integration" do
+        context "when no auto_dunning premium integration" do
         it "returns an error" do
           result = create_service.call
 
@@ -55,7 +53,7 @@ RSpec.describe DunningCampaigns::CreateService, type: :service, aggregate_failur
 
       context "when auto_dunning premium integration" do
         let(:organization) do
-          create(:organization, premium_integrations: ["auto_dunning"])
+          create(:organization)
         end
 
         it "creates a dunning campaign" do

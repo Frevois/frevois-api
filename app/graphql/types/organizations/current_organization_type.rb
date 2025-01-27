@@ -37,10 +37,6 @@ module Types
 
       field :eu_tax_management, Boolean, null: false
 
-      # TODO: Also check if Nango ENV var is set in order to lock/unlock this feature
-      #       This would enable us to use premium add_on logic on OSS version
-      field :premium_integrations, [Types::Integrations::PremiumIntegrationTypeEnum], null: false
-
       field :billing_configuration, Types::Organizations::BillingConfiguration, permission: 'organization:invoices:view'
       field :email_settings, [Types::Organizations::EmailSettingsEnum], permission: 'organization:emails:view'
       field :finalize_zero_amount_invoice, Boolean, null: false

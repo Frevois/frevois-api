@@ -190,9 +190,7 @@ RSpec.describe Invoices::ProgressiveBillingService, type: :service do
     end
 
     context 'with lago_premium' do
-      around { |test| lago_premium!(&test) }
-
-      it 'enqueues an GeneratePdfAndNotifyJob with email true' do
+        it 'enqueues an GeneratePdfAndNotifyJob with email true' do
         expect { create_service.call }
           .to have_enqueued_job(Invoices::GeneratePdfAndNotifyJob).with(hash_including(email: true))
       end

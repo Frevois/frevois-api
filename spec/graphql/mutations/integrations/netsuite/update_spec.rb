@@ -29,11 +29,8 @@ RSpec.describe Mutations::Integrations::Netsuite::Update, type: :graphql do
     GQL
   end
 
-  around { |test| lago_premium!(&test) }
-
   before do
     integration
-    membership.organization.update!(premium_integrations: ['netsuite'])
   end
 
   it_behaves_like 'requires current user'

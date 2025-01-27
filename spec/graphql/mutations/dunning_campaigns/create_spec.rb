@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe Mutations::DunningCampaigns::Create, type: :graphql do
   let(:required_permission) { "dunning_campaigns:create" }
-  let(:organization) { create(:organization, premium_integrations: ["auto_dunning"]) }
+  let(:organization) { create(:organization) }
   let(:membership) { create(:membership, organization:) }
   let(:input) do
     {
@@ -42,8 +42,6 @@ RSpec.describe Mutations::DunningCampaigns::Create, type: :graphql do
       }
     GQL
   end
-
-  around { |test| lago_premium!(&test) }
 
   it_behaves_like "requires current user"
   it_behaves_like "requires current organization"

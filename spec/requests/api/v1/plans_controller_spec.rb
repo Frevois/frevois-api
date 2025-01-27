@@ -78,21 +78,8 @@ RSpec.describe Api::V1::PlansController, type: :request do
         expect(json[:plan][:charges].first[:lago_id]).to be_present
       end
 
-      context 'when license is not premium' do
-        it 'ignores premium fields' do
-          subject
-
-          expect(response).to have_http_status(:success)
-          charge = json[:plan][:charges].first
-          expect(charge[:invoiceable]).to be true
-          expect(charge[:regroup_paid_fees]).to be_nil
-        end
-      end
-
       context 'when license is premium' do
-        around { |test| lago_premium!(&test) }
-
-        it 'updates premium fields' do
+            it 'updates premium fields' do
           subject
 
           expect(response).to have_http_status(:success)
@@ -104,35 +91,18 @@ RSpec.describe Api::V1::PlansController, type: :request do
 
       context 'with minimum commitment' do
         context 'when license is premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'creates a plan with minimum commitment' do
+                it 'creates a plan with minimum commitment' do
             subject
 
             expect(response).to have_http_status(:success)
             expect(json[:plan][:minimum_commitment][:lago_id]).to be_present
           end
         end
-
-        context 'when license is not premium' do
-          it 'does not create minimum commitment' do
-            subject
-
-            expect(response).to have_http_status(:success)
-            expect(json[:plan][:minimum_commitment]).not_to be_present
-          end
-        end
       end
 
       context 'with usage thresholds' do
         context 'when license is premium' do
-          around { |test| lago_premium!(&test) }
-
-          context 'when progressive billing premium integration is present' do
-            before do
-              organization.update!(premium_integrations: ['progressive_billing'])
-            end
-
+                context 'when progressive billing premium integration is present' do
             it 'creates a plan with usage thresholds' do
               subject
 
@@ -149,15 +119,6 @@ RSpec.describe Api::V1::PlansController, type: :request do
               expect(response).to have_http_status(:success)
               expect(json[:plan][:usage_thresholds].count).to eq(0)
             end
-          end
-        end
-
-        context 'when license is not premium' do
-          it 'does not create usage thresholds' do
-            subject
-
-            expect(response).to have_http_status(:success)
-            expect(json[:plan][:usage_thresholds].count).to eq(0)
           end
         end
       end
@@ -345,34 +306,6 @@ RSpec.describe Api::V1::PlansController, type: :request do
       end
     end
 
-    context 'when license is not premium' do
-      let(:charges_params) do
-        [
-          {
-            billable_metric_id: billable_metric.id,
-            charge_model: 'standard',
-            properties: {
-              amount: '0.22'
-            },
-            tax_codes:,
-            pay_in_advance: true,
-            invoiceable: false,
-            regroup_paid_fees: 'invoice'
-          }
-        ]
-      end
-
-      it 'ignores premium fields' do
-        subject
-
-        expect(response).to have_http_status(:success)
-        charge = json[:plan][:charges].first
-        expect(charge[:pay_in_advance]).to be true
-        expect(charge[:invoiceable]).to be true
-        expect(charge[:regroup_paid_fees]).to be_nil
-      end
-    end
-
     context 'when license is premium' do
       let(:charges_params) do
         [
@@ -389,10 +322,6 @@ RSpec.describe Api::V1::PlansController, type: :request do
           }
         ]
       end
-
-      around { |test| lago_premium!(&test) }
-
-      before { organization.update!(premium_integrations: ['progressive_billing']) }
 
       it 'updates premium fields' do
         subject
@@ -413,9 +342,7 @@ RSpec.describe Api::V1::PlansController, type: :request do
         before { update_params.merge!(minimum_commitment_params) }
 
         context 'when license is premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'creates minimum commitment' do
+                it 'creates minimum commitment' do
             subject
 
             expect(response).to have_http_status(:success)
@@ -423,31 +350,11 @@ RSpec.describe Api::V1::PlansController, type: :request do
               .to eq(update_params[:minimum_commitment][:amount_cents])
           end
         end
-
-        context 'when license is not premium' do
-          it 'does not create minimum commitment' do
-            subject
-
-            expect(response).to have_http_status(:success)
-            expect(json[:plan][:minimum_commitment]).to be_nil
-          end
-        end
       end
 
       context 'when request does not contain minimum commitment params' do
         context 'when license is premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'does not create minimum commitment' do
-            subject
-
-            expect(response).to have_http_status(:success)
-            expect(json[:plan][:minimum_commitment]).to be_nil
-          end
-        end
-
-        context 'when license is not premium' do
-          it 'does not create minimum commitment' do
+                it 'does not create minimum commitment' do
             subject
 
             expect(response).to have_http_status(:success)
@@ -467,31 +374,18 @@ RSpec.describe Api::V1::PlansController, type: :request do
           let(:minimum_commitment_params) { {minimum_commitment: {}} }
 
           context 'when license is premium' do
-            around { |test| lago_premium!(&test) }
-
-            it 'deletes minimum commitment' do
+                    it 'deletes minimum commitment' do
               subject
 
               expect(response).to have_http_status(:success)
               expect(json[:plan][:minimum_commitment]).to be_nil
             end
           end
-
-          context 'when license is not premium' do
-            it 'does not delete the minimum commitment' do
-              subject
-
-              expect(response).to have_http_status(:success)
-              expect(json[:plan][:minimum_commitment][:amount_cents]).to eq(minimum_commitment.amount_cents)
-            end
-          end
         end
 
         context 'when minimum commitment params are not an empty hash' do
           context 'when license is premium' do
-            around { |test| lago_premium!(&test) }
-
-            it 'updates minimum commitment' do
+                    it 'updates minimum commitment' do
               subject
 
               expect(response).to have_http_status(:success)
@@ -499,32 +393,12 @@ RSpec.describe Api::V1::PlansController, type: :request do
                 .to eq(update_params[:minimum_commitment][:amount_cents])
             end
           end
-
-          context 'when license is not premium' do
-            it 'does not update minimum commitment' do
-              subject
-
-              expect(response).to have_http_status(:success)
-              expect(json[:plan][:minimum_commitment][:amount_cents]).to eq(minimum_commitment.amount_cents)
-            end
-          end
         end
       end
 
       context 'when request does not contain minimum commitment params' do
         context 'when license is premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'does not update minimum commitment' do
-            subject
-
-            expect(response).to have_http_status(:success)
-            expect(json[:plan][:minimum_commitment][:amount_cents]).to eq(minimum_commitment.amount_cents)
-          end
-        end
-
-        context 'when license is not premium' do
-          it 'does not update minimum commitment' do
+                it 'does not update minimum commitment' do
             subject
 
             expect(response).to have_http_status(:success)

@@ -148,11 +148,7 @@ RSpec.describe ApiKey, type: :model do
     let(:resource) { described_class::RESOURCES.sample }
     let(:mode) { described_class::MODES.sample }
 
-    before { api_key.organization.update!(premium_integrations:) }
-
     context "when organization has 'api_permissions' add-on enabled" do
-      let(:premium_integrations) { ["api_permissions"] }
-
       context "when corresponding resource is specified in permissions" do
         let(:permissions) { {resource => allowed_modes} }
 
@@ -178,38 +174,6 @@ RSpec.describe ApiKey, type: :model do
 
         it "returns false" do
           expect(subject).to be false
-        end
-      end
-    end
-
-    context "when organization has 'api_permissions' add-on disabled" do
-      let(:premium_integrations) { [] }
-
-      context "when corresponding resource is specified in permissions" do
-        let(:permissions) { {resource => allowed_modes} }
-
-        context "when corresponding resource allows provided mode" do
-          let(:allowed_modes) { [mode] }
-
-          it "returns true" do
-            expect(subject).to be true
-          end
-        end
-
-        context "when corresponding resource does not allow provided mode" do
-          let(:allowed_modes) { described_class::MODES.excluding(mode) }
-
-          it "returns true" do
-            expect(subject).to be true
-          end
-        end
-      end
-
-      context "when corresponding resource does not specified in permissions" do
-        let(:permissions) { described_class.default_permissions.without(resource) }
-
-        it "returns true" do
-          expect(subject).to be true
         end
       end
     end

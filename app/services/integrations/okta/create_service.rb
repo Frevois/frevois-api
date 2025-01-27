@@ -6,10 +6,6 @@ module Integrations
       def call(**args)
         organization = Organization.find_by(id: args[:organization_id])
 
-        unless organization.premium_integrations.include?('okta')
-          return result.not_allowed_failure!(code: 'premium_integration_missing')
-        end
-
         integration = Integrations::OktaIntegration.new(
           organization:,
           name: 'Okta Integration',

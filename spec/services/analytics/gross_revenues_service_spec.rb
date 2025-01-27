@@ -11,9 +11,7 @@ RSpec.describe Analytics::GrossRevenuesService, type: :service do
     subject(:service_call) { service.call }
 
     context 'when licence is premium' do
-      around { |test| lago_premium!(&test) }
-
-      it 'returns success' do
+        it 'returns success' do
         expect(service_call).to be_success
       end
     end

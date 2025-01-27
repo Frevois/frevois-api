@@ -11,8 +11,6 @@ describe 'Update Customer Invoice Grace Period Scenarios', :scenarios, type: :re
   let(:pdf_file) { StringIO.new(File.read(Rails.root.join('spec/fixtures/blank.pdf'))) }
   let(:pdf_result) { OpenStruct.new(io: pdf_file) }
 
-  around { |test| lago_premium!(&test) }
-
   before do
     allow(Utils::PdfGenerator).to receive(:new).and_return(pdf_generator)
     allow(pdf_generator).to receive(:call).and_return(pdf_result)

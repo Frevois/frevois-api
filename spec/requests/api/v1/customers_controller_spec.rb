@@ -41,9 +41,7 @@ RSpec.describe Api::V1::CustomersController, type: :request do
     end
 
     context 'with premium features' do
-      around { |test| lago_premium!(&test) }
-
-      let(:create_params) do
+        let(:create_params) do
         {
           external_id: SecureRandom.uuid,
           name: 'Foo Bar',
@@ -76,9 +74,7 @@ RSpec.describe Api::V1::CustomersController, type: :request do
     end
 
     context 'with billing configuration' do
-      around { |test| lago_premium!(&test) }
-
-      let(:create_params) do
+        let(:create_params) do
         {
           external_id: SecureRandom.uuid,
           name: 'Foo Bar',
@@ -193,7 +189,7 @@ RSpec.describe Api::V1::CustomersController, type: :request do
     end
 
     context "with account_type partner" do
-      let(:organization) { create(:organization, premium_integrations: ["revenue_share"]) }
+      let(:organization) { create(:organization) }
 
       let(:create_params) do
         {
@@ -203,9 +199,7 @@ RSpec.describe Api::V1::CustomersController, type: :request do
         }
       end
 
-      around { |test| lago_premium!(&test) }
-
-      it 'returns a success' do
+        it 'returns a success' do
         subject
         expect(response).to have_http_status(:success)
 

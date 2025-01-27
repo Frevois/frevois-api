@@ -82,10 +82,6 @@ RSpec.describe Mutations::Plans::Create, type: :graphql do
 
   let(:tax) { create(:tax, organization:) }
 
-  around { |test| lago_premium!(&test) }
-
-  before { organization.update!(premium_integrations: ['progressive_billing']) }
-
   it_behaves_like 'requires current user'
   it_behaves_like 'requires current organization'
   it_behaves_like 'requires permission', 'plans:create'

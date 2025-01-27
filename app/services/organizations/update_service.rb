@@ -39,7 +39,7 @@ module Organizations
         webhook_endpoint.update!(webhook_url: params[:webhook_url])
       end
 
-      if License.premium? && billing.key?(:invoice_grace_period)
+      if billing.key?(:invoice_grace_period)
         Organizations::UpdateInvoiceGracePeriodService.call(
           organization:,
           grace_period: billing[:invoice_grace_period]
@@ -71,8 +71,6 @@ module Organizations
     attr_reader :organization, :params
 
     def assign_premium_attributes
-      return unless License.premium?
-
       organization.timezone = params[:timezone] if params.key?(:timezone)
       organization.email_settings = params[:email_settings] if params.key?(:email_settings)
     end

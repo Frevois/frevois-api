@@ -30,8 +30,6 @@ RSpec.describe Mutations::ApiKeys::Create, type: :graphql do
   it_behaves_like 'requires permission', 'developers:keys:manage'
 
   context 'with premium organization' do
-    around { |test| lago_premium!(&test) }
-
     it 'creates a new API key' do
       expect { result }.to change(ApiKey, :count).by(1)
     end
@@ -40,12 +38,6 @@ RSpec.describe Mutations::ApiKeys::Create, type: :graphql do
       api_key_response = result['data']['createApiKey']
 
       expect(api_key_response['name']).to eq(name)
-    end
-  end
-
-  context 'with free organization' do
-    it 'returns an error' do
-      expect_graphql_error(result:, message: 'feature_unavailable')
     end
   end
 end

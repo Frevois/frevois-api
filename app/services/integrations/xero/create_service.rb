@@ -6,10 +6,6 @@ module Integrations
       def call(**args)
         organization = Organization.find_by(id: args[:organization_id])
 
-        unless organization.premium_integrations.include?('xero')
-          return result.not_allowed_failure!(code: 'premium_integration_missing')
-        end
-
         integration = Integrations::XeroIntegration.new(
           organization:,
           name: args[:name],

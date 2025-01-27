@@ -29,8 +29,6 @@ class ApiKey < ApplicationRecord
   scope :non_expiring, -> { where(expires_at: nil) }
 
   def permit?(resource, mode)
-    return true unless organization.premium_integrations.include?('api_permissions')
-
     Array(permissions[resource]).include?(mode)
   end
 

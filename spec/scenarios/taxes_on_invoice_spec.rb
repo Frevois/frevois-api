@@ -16,8 +16,6 @@ describe 'Taxes on Invoice Scenarios', :scenarios, type: :request do
     allow(pdf_generator).to receive(:call).and_return(pdf_result)
   end
 
-  around { |test| lago_premium!(&test) }
-
   context 'when timezone is negative and not the same day as UTC' do
     it 'creates an invoice for the expected period' do
       travel_to(DateTime.new(2023, 1, 1)) do

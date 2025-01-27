@@ -5,7 +5,6 @@ module Types
     field :id, ID, null: false
 
     field :email, String
-    field :premium, Boolean, null: false
 
     field :memberships, [Types::MembershipType], null: false
     # TODO: keeping organization for backwards compatibility, remove once the frontend is updated
@@ -20,10 +19,6 @@ module Types
 
     def organizations
       memberships.map(&:organization)
-    end
-
-    def premium
-      License.premium?
     end
   end
 end

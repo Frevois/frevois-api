@@ -7,45 +7,15 @@ RSpec.describe ManualPayments::CreateService, type: :service do
 
   let(:invoice) { create(:invoice, customer:, organization:, total_amount_cents: 10000, status: :finalized) }
   let(:invoice_id) { invoice.id }
-  let(:organization) { create(:organization, premium_integrations:) }
+  let(:organization) { create(:organization) }
   let(:customer) { create(:customer, organization:) }
   let(:params) { {invoice_id:, amount_cents:, reference: "ref1", paid_at:} }
   let(:paid_at) { 1.year.ago.iso8601 }
   let(:amount_cents) { 10000 }
 
   describe "#call" do
-    context "when organization is not premium" do
-      let(:premium_integrations) { %w[] }
-
-      it "returns forbidden failure" do
-        result = service.call
-
-        aggregate_failures do
-          expect(result).not_to be_success
-          expect(result.error).to be_a(BaseService::ForbiddenFailure)
-        end
-      end
-    end
-
     context "when organization is premium" do
-      around { |test| lago_premium!(&test) }
-
-      context "with the premium_integration disabled" do
-        let(:premium_integrations) { %w[] }
-
-        it "returns forbidden failure" do
-          result = service.call
-
-          aggregate_failures do
-            expect(result).not_to be_success
-            expect(result.error).to be_a(BaseService::ForbiddenFailure)
-          end
-        end
-      end
-
       context "with the premium_integration enabled" do
-        let(:premium_integrations) { %w[manual_payments] }
-
         context "when invoice does not exist" do
           let(:invoice_id) { SecureRandom.uuid }
 

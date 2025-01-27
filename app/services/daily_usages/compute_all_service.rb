@@ -26,7 +26,6 @@ module DailyUsages
       Subscription
         .with(existing_daily_usage:)
         .joins(customer: :organization)
-        .merge(Organization.with_revenue_analytics_support)
         .joins("LEFT JOIN existing_daily_usage ON subscriptions.id = existing_daily_usage.subscription_id")
         .active
         .where("existing_daily_usage.subscription_id IS NULL") # Exclude subscriptions that already have a daily usage record for yesterday in customer's timezone

@@ -33,8 +33,6 @@ RSpec.describe Mutations::ApiKeys::Rotate, type: :graphql do
   context 'when api key with such ID exists in the current organization' do
     let(:api_key) { membership.organization.api_keys.first }
 
-    around { |test| lago_premium!(&test) }
-
     it 'expires the api key' do
       expect { result }
         .to change { api_key.reload.expires_at&.iso8601 }

@@ -48,8 +48,6 @@ describe 'Create credit note Scenarios', :scenarios, type: :request do
   let(:plan_applied_tax) { create(:plan_applied_tax, plan: plan2, tax: plan_tax) }
   let(:plan_applied_tax2) { create(:plan_applied_tax, plan: plan2, tax:) }
 
-  around { |test| lago_premium!(&test) }
-
   before do
     tax
     plan_applied_tax

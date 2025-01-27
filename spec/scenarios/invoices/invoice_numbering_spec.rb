@@ -750,10 +750,6 @@ describe 'Invoice Numbering Scenario', :scenarios, type: :request, transaction: 
   context 'with partner customer' do
     let(:customer_third) { create(:customer, organization:, account_type: 'partner') }
 
-    around { |test| lago_premium!(&test) }
-
-    before { organization.update!(premium_integrations: ['revenue_share']) }
-
     it 'creates invoice numbers correctly' do
       # NOTE: Jul 19th: create the subscription
       travel_to(subscription_at) do

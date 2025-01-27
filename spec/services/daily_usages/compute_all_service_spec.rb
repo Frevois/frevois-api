@@ -7,13 +7,9 @@ RSpec.describe DailyUsages::ComputeAllService, type: :service do
 
   let(:timestamp) { Time.zone.parse("2024-10-22 00:05:00") }
 
-  let(:organization) { create(:organization, premium_integrations:) }
+  let(:organization) { create(:organization) }
   let(:customer) { create(:customer, organization:) }
   let(:subscription) { create(:subscription, customer:) }
-
-  let(:premium_integrations) do
-    ["revenue_analytics"]
-  end
 
   before { subscription }
 
@@ -33,7 +29,7 @@ RSpec.describe DailyUsages::ComputeAllService, type: :service do
     end
 
     context "when the organization has a timezone" do
-      let(:organization) { create(:organization, timezone: "America/Sao_Paulo", premium_integrations:) }
+      let(:organization) { create(:organization, timezone: "America/Sao_Paulo") }
 
       it "takes the timezone into account" do
         expect(compute_service.call).to be_success
@@ -65,15 +61,6 @@ RSpec.describe DailyUsages::ComputeAllService, type: :service do
           expect(compute_service.call).to be_success
           expect(DailyUsages::ComputeJob).to have_been_enqueued.with(subscription, timestamp:)
         end
-      end
-    end
-
-    context "when revenue_analytics premium integration flag is not present" do
-      let(:premium_integrations) { [] }
-
-      it "does not enqueue any job" do
-        expect(compute_service.call).to be_success
-        expect(DailyUsages::ComputeJob).not_to have_been_enqueued
       end
     end
   end

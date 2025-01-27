@@ -57,9 +57,7 @@ module ManualPayments
     end
 
     def check_preconditions
-      return result.forbidden_failure! unless License.premium?
       return result.not_found_failure!(resource: "invoice") unless invoice
-      return result.forbidden_failure! unless invoice.organization.premium_integrations.include?('manual_payments')
       result.single_validation_failure!(error_code: "invalid_date", field: "paid_at") unless valid_paid_at?
     end
 

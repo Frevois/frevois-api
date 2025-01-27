@@ -135,9 +135,7 @@ RSpec.describe Subscriptions::UpdateService, type: :service do
         }
       end
 
-      around { |test| lago_premium!(&test) }
-
-      it 'creates the new plan accordingly' do
+        it 'creates the new plan accordingly' do
         update_service.call
 
         expect(subscription.plan.reload.name).to eq('new name')
@@ -154,24 +152,6 @@ RSpec.describe Subscriptions::UpdateService, type: :service do
           expect(subscription.plan.reload.name).to eq('new name')
           expect(subscription.plan_id).to eq(plan.id)
         end
-      end
-    end
-
-    context 'when License is free and plan_overrides is passed' do
-      let(:params) do
-        {
-          name: 'new name',
-          plan_overrides: {
-            amount_cents: 0
-          }
-        }
-      end
-
-      it 'returns an error' do
-        result = update_service.call
-
-        expect(result).not_to be_success
-        expect(result.error.code).to eq('feature_unavailable')
       end
     end
   end

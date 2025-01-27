@@ -172,9 +172,7 @@ RSpec.describe Invoices::SubscriptionService, type: :service do
     end
 
     context "with lago_premium" do
-      around { |test| lago_premium!(&test) }
-
-      it "enqueues GeneratePdfAndNotifyJob with email true" do
+        it "enqueues GeneratePdfAndNotifyJob with email true" do
         expect do
           invoice_service.call
         end.to have_enqueued_job(Invoices::GeneratePdfAndNotifyJob).with(hash_including(email: true))
@@ -319,10 +317,6 @@ RSpec.describe Invoices::SubscriptionService, type: :service do
     end
 
     context "when revenue_analytics is set" do
-      before do
-        organization.update!(premium_integrations: %w[revenue_analytics])
-      end
-
       it "enqueues DailyUsages::FillFromInvoiceJob with email false" do
         expect { invoice_service.call }
           .to have_enqueued_job(DailyUsages::FillFromInvoiceJob)

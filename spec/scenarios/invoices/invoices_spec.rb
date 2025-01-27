@@ -1125,8 +1125,6 @@ describe 'Invoices Scenarios', :scenarios, type: :request do
       }
     end
 
-    around { |test| lago_premium!(&test) }
-
     it 'bills fees correctly' do
       travel_to(Time.zone.parse('2024-01-01T00:00:00')) do
         create(
@@ -1766,9 +1764,7 @@ describe 'Invoices Scenarios', :scenarios, type: :request do
       let(:organization) { create(:organization, webhook_url: nil, invoice_grace_period: 3) }
       let(:plan) { create(:plan, pay_in_advance: true, organization:, amount_cents: 1000) }
 
-      around { |test| lago_premium!(&test) }
-
-      it 'finalizes draft invoices' do
+        it 'finalizes draft invoices' do
         create_subscription(
           {
             external_customer_id: customer.external_id,

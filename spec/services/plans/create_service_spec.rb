@@ -125,34 +125,8 @@ RSpec.describe Plans::CreateService, type: :service do
       expect(plan.minimum_commitment).to be_nil
     end
 
-    context 'without premium license' do
-      it 'does not create progressive billing thresholds' do
-        plans_service.call
-
-        plan = Plan.order(:created_at).last
-
-        expect(plan.usage_thresholds.count).to eq(0)
-      end
-    end
-
     context 'with premium license' do
-      around { |test| lago_premium!(&test) }
-
-      context 'when progressive billing premium integration is not present' do
-        it 'does not create progressive billing thresholds' do
-          plans_service.call
-
-          plan = Plan.order(:created_at).last
-
-          expect(plan.usage_thresholds.count).to eq(0)
-        end
-      end
-
       context 'when progressive billing premium integration is present' do
-        before do
-          organization.update!(premium_integrations: ['progressive_billing'])
-        end
-
         it 'creates progressive billing thresholds' do
           plans_service.call
 
@@ -225,9 +199,7 @@ RSpec.describe Plans::CreateService, type: :service do
     end
 
     context 'when premium' do
-      around { |test| lago_premium!(&test) }
-
-      let(:charges_args) do
+        let(:charges_args) do
         [
           {
             billable_metric_id: billable_metric.id,

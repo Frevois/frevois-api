@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Create partner and run billing Scenarios', :scenarios, type: :request do
-  let(:organization) { create(:organization, webhook_url: nil, document_numbering: 'per_organization', premium_integrations: ['revenue_share']) }
+  let(:organization) { create(:organization, webhook_url: nil, document_numbering: 'per_organization') }
   let(:partner) { create(:customer, organization:) }
   let(:customers) { create_list(:customer, 2, organization:) }
   let(:plan) { create(:plan, organization:) }
@@ -11,8 +11,6 @@ describe 'Create partner and run billing Scenarios', :scenarios, type: :request 
   let(:params) do
     {code: metric.code, transaction_id: SecureRandom.uuid}
   end
-
-  around { |test| lago_premium!(&test) }
 
   it 'allows to switch customer to partner before customer has assigned plans' do
     expect do

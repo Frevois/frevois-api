@@ -91,9 +91,7 @@ RSpec.describe Wallets::UpdateService, type: :service do
     end
 
     context 'with recurring transaction rules' do
-      around { |test| lago_premium!(&test) }
-
-      let(:recurring_transaction_rule) { create(:recurring_transaction_rule, wallet:) }
+        let(:recurring_transaction_rule) { create(:recurring_transaction_rule, wallet:) }
       let(:transaction_metadata) { [] }
       let(:rules) do
         [

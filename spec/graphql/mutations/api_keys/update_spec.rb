@@ -34,8 +34,6 @@ RSpec.describe Mutations::ApiKeys::Update, type: :graphql do
   context 'when api key with such ID exists in the current organization' do
     let(:api_key) { membership.organization.api_keys.first }
 
-    before { membership.organization.update!(premium_integrations: ['api_permissions']) }
-
     context 'when permissions are present' do
       it 'returns updated api key' do
         api_key_response = result['data']['updateApiKey']

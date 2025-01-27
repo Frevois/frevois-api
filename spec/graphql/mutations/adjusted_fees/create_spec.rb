@@ -29,8 +29,6 @@ RSpec.describe Mutations::AdjustedFees::Create, type: :graphql do
 
   before { fee.invoice.draft! }
 
-  around { |test| lago_premium!(&test) }
-
   it_behaves_like 'requires current user'
   it_behaves_like 'requires current organization'
   it_behaves_like 'requires permission', 'invoices:update'

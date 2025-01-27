@@ -71,9 +71,7 @@ RSpec.describe Api::V1::OrganizationsController, type: :request do
     end
 
     context 'with premium features' do
-      around { |test| lago_premium!(&test) }
-
-      it 'updates an organization' do
+        it 'updates an organization' do
         subject
 
         expect(response).to have_http_status(:success)

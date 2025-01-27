@@ -12,6 +12,5 @@ RSpec.describe Types::CustomerPortal::Organizations::Object do
   it { is_expected.to have_field(:default_currency).of_type("CurrencyEnum!") }
   it { is_expected.to have_field(:logo_url).of_type("String") }
   it { is_expected.to have_field(:name).of_type("String!") }
-  it { is_expected.to have_field(:premium_integrations).of_type("[PremiumIntegrationTypeEnum!]!") }
   it { is_expected.to have_field(:timezone).of_type("TimezoneEnum") }
 end

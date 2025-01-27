@@ -22,25 +22,8 @@ RSpec.describe Integrations::Anrok::CreateService, type: :service do
       }
     end
 
-    context 'without premium license' do
-      it 'does not create an integration' do
-        expect { service_call }.not_to change(Integrations::AnrokIntegration, :count)
-      end
-
-      it 'returns an error' do
-        result = service_call
-
-        aggregate_failures do
-          expect(result).not_to be_success
-          expect(result.error).to be_a(BaseService::ForbiddenFailure)
-        end
-      end
-    end
-
     context 'with premium license' do
-      around { |test| lago_premium!(&test) }
-
-      context 'without validation errors' do
+        context 'without validation errors' do
         it 'creates an integration' do
           expect { service_call }.to change(Integrations::AnrokIntegration, :count).by(1)
 

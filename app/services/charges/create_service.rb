@@ -37,11 +37,9 @@ module Charges
           ).raise_if_error!
         end
 
-        if License.premium?
-          charge.invoiceable = params[:invoiceable] unless params[:invoiceable].nil?
-          charge.regroup_paid_fees = params[:regroup_paid_fees] if params.key?(:regroup_paid_fees)
-          charge.min_amount_cents = params[:min_amount_cents] || 0
-        end
+        charge.invoiceable = params[:invoiceable] unless params[:invoiceable].nil?
+        charge.regroup_paid_fees = params[:regroup_paid_fees] if params.key?(:regroup_paid_fees)
+        charge.min_amount_cents = params[:min_amount_cents] || 0
 
         charge.save!
 
@@ -66,7 +64,6 @@ module Charges
 
     def charge_model(params)
       model = params[:charge_model]&.to_sym
-      return if model == :graduated_percentage && !License.premium?
 
       model
     end

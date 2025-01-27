@@ -53,8 +53,8 @@ module Charges
           invoiceable = params.delete(:invoiceable)
           min_amount_cents = params.delete(:min_amount_cents)
 
-          charge.invoiceable = invoiceable if License.premium? && !invoiceable.nil?
-          charge.min_amount_cents = min_amount_cents || 0 if License.premium?
+          charge.invoiceable = invoiceable if !invoiceable.nil?
+          charge.min_amount_cents = min_amount_cents || 0
 
           charge.update!(params)
         end

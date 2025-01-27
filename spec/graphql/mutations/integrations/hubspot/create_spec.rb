@@ -25,9 +25,7 @@ RSpec.describe Mutations::Integrations::Hubspot::Create, type: :graphql do
     GQL
   end
 
-  around { |test| lago_premium!(&test) }
 
-  before { membership.organization.update!(premium_integrations: ['hubspot']) }
 
   it_behaves_like 'requires current user'
   it_behaves_like 'requires current organization'

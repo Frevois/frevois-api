@@ -23,34 +23,9 @@ RSpec.describe Integrations::Netsuite::UpdateService, type: :service do
       }
     end
 
-    context 'without premium license' do
-      it 'returns an error' do
-        result = service_call
-
-        aggregate_failures do
-          expect(result).not_to be_success
-          expect(result.error).to be_a(BaseService::MethodNotAllowedFailure)
-        end
-      end
-    end
-
     context 'with premium license' do
-      around { |test| lago_premium!(&test) }
-
-      context 'with netsuite premium integration not present' do
-        it 'returns an error' do
-          result = service_call
-
-          aggregate_failures do
-            expect(result).not_to be_success
-            expect(result.error).to be_a(BaseService::MethodNotAllowedFailure)
-          end
-        end
-      end
-
       context 'with netsuite premium integration present' do
         before do
-          organization.update!(premium_integrations: ['netsuite'])
           allow(Integrations::Aggregator::SendRestletEndpointJob).to receive(:perform_later)
           allow(Integrations::Aggregator::PerformSyncJob).to receive(:perform_later)
         end

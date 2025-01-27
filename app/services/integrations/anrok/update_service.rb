@@ -13,8 +13,6 @@ module Integrations
       def call
         return result.not_found_failure!(resource: 'integration') unless integration
 
-        return result.forbidden_failure! unless License.premium?
-
         integration.name = params[:name] if params.key?(:name)
         integration.code = params[:code] if params.key?(:code)
         integration.api_key = params[:api_key] if params.key?(:api_key)

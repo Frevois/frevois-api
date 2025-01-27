@@ -26,9 +26,7 @@ RSpec.describe AdjustedFees::CreateService, type: :service do
     end
 
     context 'when license is premium' do
-      around { |test| lago_premium!(&test) }
-
-      it 'creates an adjusted fee' do
+        it 'creates an adjusted fee' do
         expect { create_service.call }.to change(AdjustedFee, :count).by(1)
       end
 
@@ -136,18 +134,6 @@ RSpec.describe AdjustedFees::CreateService, type: :service do
             expect(result.error).to be_a(BaseService::ValidationFailure)
             expect(result.error.messages[:adjusted_fee]).to eq(['already_exists'])
           end
-        end
-      end
-    end
-
-    context 'when license is not premium' do
-      it 'returns forbidden status' do
-        result = create_service.call
-
-        aggregate_failures do
-          expect(result).not_to be_success
-          expect(result.error).to be_a(BaseService::ForbiddenFailure)
-          expect(result.error.code).to eq('feature_unavailable')
         end
       end
     end

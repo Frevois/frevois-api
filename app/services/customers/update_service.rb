@@ -74,7 +74,7 @@ module Customers
         end
       end
 
-      if License.premium? && args.key?(:invoice_grace_period)
+      if args.key?(:invoice_grace_period)
         Customers::UpdateInvoiceGracePeriodService.call(customer:, grace_period: args[:invoice_grace_period])
       end
 
@@ -82,7 +82,7 @@ module Customers
         billing = args[:billing_configuration]
         customer.invoice_footer = billing[:invoice_footer] if billing.key?(:invoice_footer)
 
-        if License.premium? && billing.key?(:invoice_grace_period)
+        if billing.key?(:invoice_grace_period)
           Customers::UpdateInvoiceGracePeriodService.call(customer:, grace_period: billing[:invoice_grace_period])
         end
       end
@@ -193,8 +193,6 @@ module Customers
     end
 
     def assign_premium_attributes(customer, args)
-      return unless License.premium?
-
       customer.timezone = args[:timezone] if args.key?(:timezone)
     end
 

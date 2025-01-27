@@ -21,8 +21,6 @@ RSpec.describe Mutations::Customers::UpdateInvoiceGracePeriod, type: :graphql do
     GQL
   end
 
-  around { |test| lago_premium!(&test) }
-
   it_behaves_like 'requires current user'
   it_behaves_like 'requires permission', %w[customers:update customer_settings:update:grace_period]
 

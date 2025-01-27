@@ -87,10 +87,7 @@ RSpec.describe Plans::OverrideService, type: :service do
       ]
     end
 
-    around { |test| lago_premium!(&test) }
-
     before do
-      organization.update!(premium_integrations: ['progressive_billing'])
       charge
       usage_threshold
       allow(SegmentTrackJob).to receive(:perform_later)

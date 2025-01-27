@@ -29,7 +29,6 @@ class DropZeroAmountFees < ActiveRecord::Migration[7.1]
           FROM adjusted_fees
           WHERE adjusted_fees.fee_id IS NOT NULL
         )
-        AND NOT ('zero_amount_fees' = ANY(organizations.premium_integrations))
         LIMIT 1000
     SQL
 

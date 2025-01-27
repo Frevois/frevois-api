@@ -302,9 +302,7 @@ RSpec.describe Customers::CreateService, type: :service do
     end
 
     context 'with premium features' do
-      around { |test| lago_premium!(&test) }
-
-      let(:create_args) do
+        let(:create_args) do
         {
           external_id: SecureRandom.uuid,
           name: 'Foo Bar',
@@ -334,7 +332,7 @@ RSpec.describe Customers::CreateService, type: :service do
 
       context "with revenue share feature enabled and account_type 'partner'" do
         let(:organization) do
-          create(:organization, premium_integrations: ["revenue_share"])
+          create(:organization)
         end
 
         before do
@@ -697,9 +695,7 @@ RSpec.describe Customers::CreateService, type: :service do
       end
 
       context 'when updating invoice grace period' do
-        around { |test| lago_premium!(&test) }
-
-        let(:create_args) do
+            let(:create_args) do
           {
             external_id:,
             billing_configuration: {invoice_grace_period: 2}
@@ -1154,9 +1150,7 @@ RSpec.describe Customers::CreateService, type: :service do
     end
 
     context 'with premium features' do
-      around { |test| lago_premium!(&test) }
-
-      let(:create_args) do
+        let(:create_args) do
         {
           external_id: SecureRandom.uuid,
           name: 'Foo Bar',
@@ -1185,7 +1179,7 @@ RSpec.describe Customers::CreateService, type: :service do
 
       context "with revenue share feature enabled and account_type 'partner'" do
         let(:organization) do
-          create(:organization, premium_integrations: ["revenue_share"])
+          create(:organization)
         end
 
         before do

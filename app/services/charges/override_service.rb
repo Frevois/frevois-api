@@ -10,8 +10,6 @@ module Charges
     end
 
     def call
-      return result unless License.premium?
-
       ActiveRecord::Base.transaction do
         new_charge = charge.dup.tap do |c|
           c.properties = params[:properties] if params.key?(:properties)

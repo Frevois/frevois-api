@@ -42,8 +42,6 @@ RSpec.describe Resolvers::Analytics::InvoicedUsagesResolver, type: :graphql do
   end
 
   context 'with premium feature' do
-    around { |test| lago_premium!(&test) }
-
     it 'returns a list of invoiced usages' do
       result = execute_graphql(
         current_user: membership.user,

@@ -42,8 +42,6 @@ RSpec.describe Resolvers::Analytics::MrrsResolver, type: :graphql do
   end
 
   context 'with premium feature' do
-    around { |test| lago_premium!(&test) }
-
     it 'returns a list of mrrs' do
       result = execute_graphql(
         current_user: membership.user,

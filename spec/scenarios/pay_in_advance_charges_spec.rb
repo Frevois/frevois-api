@@ -1003,9 +1003,7 @@ describe "Pay in advance charges Scenarios", :scenarios, type: :request, transac
     end
 
     describe "with min / max per transaction" do
-      around { |test| lago_premium!(&test) }
-
-      it "creates a pay_in_advance fee " do
+        it "creates a pay_in_advance fee " do
         ### 24 january: Create subscription.
         jan24 = DateTime.new(2023, 1, 24)
 

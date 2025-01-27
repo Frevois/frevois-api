@@ -19,22 +19,7 @@ RSpec.describe PaymentRequests::CreateService, type: :service do
     }
   end
 
-  around { |test| lago_premium!(&test) }
-
   describe "#call" do
-    context "when organization is not premium" do
-      before do
-        allow(License).to receive(:premium?).and_return(false)
-      end
-
-      it "returns forbidden failure" do
-        result = create_service.call
-
-        expect(result).not_to be_success
-        expect(result.error).to be_a(BaseService::ForbiddenFailure)
-      end
-    end
-
     context "when customer does not exist" do
       before { params[:external_customer_id] = "non-existing-id" }
 

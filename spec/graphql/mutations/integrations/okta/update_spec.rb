@@ -24,11 +24,8 @@ RSpec.describe Mutations::Integrations::Okta::Update, type: :graphql do
     GQL
   end
 
-  around { |test| lago_premium!(&test) }
-
   before do
     integration
-    membership.organization.update!(premium_integrations: ['okta'])
   end
 
   it_behaves_like 'requires current user'

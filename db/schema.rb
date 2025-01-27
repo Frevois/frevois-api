@@ -1043,7 +1043,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_22_112050) do
     t.string "document_number_prefix"
     t.boolean "eu_tax_management", default: false
     t.boolean "clickhouse_aggregation", default: false, null: false
-    t.string "premium_integrations", default: [], null: false, array: true
     t.boolean "custom_aggregation", default: false
     t.boolean "finalize_zero_amount_invoice", default: true, null: false
     t.boolean "clickhouse_events_store", default: false, null: false

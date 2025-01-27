@@ -57,8 +57,6 @@ Rails.application.configure do
   config.hosts << 'api.lago.dev'
   config.hosts << 'api'
 
-  config.license_url = 'http://license:3000'
-
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp

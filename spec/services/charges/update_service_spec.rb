@@ -93,9 +93,7 @@ RSpec.describe Charges::UpdateService, type: :service do
     end
 
     context 'when premium' do
-      around { |test| lago_premium!(&test) }
-
-      it 'saves premium attributes' do
+        it 'saves premium attributes' do
         update_service.call
 
         expect(charge.reload).to have_attributes(pay_in_advance: true, invoiceable: false)

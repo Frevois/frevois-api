@@ -29,14 +29,12 @@ RSpec.describe DunningCampaigns::ProcessAttemptService, type: :service, aggregat
   end
 
   context "when premium features are enabled" do
-    let(:organization) { create :organization, premium_integrations: %w[auto_dunning] }
+    let(:organization) { create :organization }
 
     let(:invoice_1) { create :invoice, organization:, customer:, currency:, payment_overdue: false }
     let(:invoice_2) { create :invoice, organization:, customer:, currency:, payment_overdue: true, total_amount_cents: 99_00 }
     let(:invoice_3) { create :invoice, organization:, customer:, currency: "USD", payment_overdue: true }
     let(:invoice_4) { create :invoice, currency:, payment_overdue: true }
-
-    around { |test| lago_premium!(&test) }
 
     before do
       invoice_1

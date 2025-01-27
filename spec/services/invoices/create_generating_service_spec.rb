@@ -122,9 +122,7 @@ RSpec.describe Invoices::CreateGeneratingService, type: :service do
     context "when customer is a partner account" do
       let(:customer) { create(:customer, account_type: "partner") }
 
-      around { |test| lago_premium!(&test) }
-
-      it "returns a failure" do
+        it "returns a failure" do
         result = create_service.call
 
         expect(result).not_to be_success
@@ -135,7 +133,7 @@ RSpec.describe Invoices::CreateGeneratingService, type: :service do
         let(:customer) { create(:customer, organization:, account_type: "partner") }
 
         let(:organization) do
-          create(:organization, premium_integrations: ["revenue_share"])
+          create(:organization)
         end
 
         it "creates an invoice with self billed" do

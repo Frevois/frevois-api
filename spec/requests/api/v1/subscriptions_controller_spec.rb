@@ -9,8 +9,6 @@ RSpec.describe Api::V1::SubscriptionsController, type: :request do
   let(:commitment_invoice_display_name) { 'Overriden minimum commitment name' }
   let(:commitment_amount_cents) { 1234 }
 
-  around { |test| lago_premium!(&test) }
-
   describe 'POST /api/v1/subscriptions' do
     subject { post_with_token(organization, '/api/v1/subscriptions', {subscription: params}) }
 
@@ -83,12 +81,6 @@ RSpec.describe Api::V1::SubscriptionsController, type: :request do
     end
 
     context 'when progressive billing premium integration is present' do
-      around { |test| lago_premium!(&test) }
-
-      before do
-        organization.update!(premium_integrations: ['progressive_billing'])
-      end
-
       it 'creates subscription with an overriden plan with usage thresholds' do
         subject
 
@@ -282,12 +274,6 @@ RSpec.describe Api::V1::SubscriptionsController, type: :request do
     end
 
     context 'when progressive billing premium integration is present' do
-      around { |test| lago_premium!(&test) }
-
-      before do
-        organization.update!(premium_integrations: ['progressive_billing'])
-      end
-
       it 'updates subscription with an overriden plan with usage thresholds' do
         subject
 

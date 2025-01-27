@@ -13,7 +13,6 @@ module Types
         field :default_currency, Types::CurrencyEnum, null: false
         field :logo_url, String
         field :name, String, null: false
-        field :premium_integrations, [Types::Integrations::PremiumIntegrationTypeEnum], null: false
         field :timezone, Types::TimezoneEnum, null: true
       end
     end

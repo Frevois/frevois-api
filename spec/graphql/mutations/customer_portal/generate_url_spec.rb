@@ -21,8 +21,6 @@ RSpec.describe Mutations::CustomerPortal::GenerateUrl, type: :graphql do
   it_behaves_like 'requires current organization'
 
   context 'when licence is premium' do
-    around { |test| lago_premium!(&test) }
-
     it 'returns customer portal url' do
       result = execute_graphql(
         current_organization: organization,

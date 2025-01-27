@@ -73,9 +73,7 @@ RSpec.describe Invoices::PaidCreditService, type: :service do
     end
 
     context 'with lago_premium' do
-      around { |test| lago_premium!(&test) }
-
-      it 'enqueues an SendEmailJob' do
+        it 'enqueues an SendEmailJob' do
         expect do
           invoice_service.call
         end.to have_enqueued_job(Invoices::GeneratePdfAndNotifyJob).with(hash_including(email: true))
@@ -148,9 +146,7 @@ RSpec.describe Invoices::PaidCreditService, type: :service do
     context 'with wallet_transaction.invoice_requires_successful_payment' do
       let(:invoice_requires_successful_payment) { true }
 
-      around { |test| lago_premium!(&test) }
-
-      it 'creates an open invoice' do
+        it 'creates an open invoice' do
         result = invoice_service.call
 
         expect(result).to be_success

@@ -24,7 +24,7 @@ module Invoices
         compute_amounts(invoice)
         Invoices::ApplyInvoiceCustomSectionsService.call(invoice:)
 
-        if License.premium? && wallet_transaction.invoice_requires_successful_payment?
+        if wallet_transaction.invoice_requires_successful_payment?
           invoice.open!
         else
           invoice.finalized!
@@ -95,7 +95,6 @@ module Invoices
     end
 
     def should_deliver_email?
-      License.premium? &&
         customer.organization.email_settings.include?('invoice.finalized')
     end
   end

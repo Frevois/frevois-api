@@ -63,7 +63,7 @@ RSpec.describe Customers::UpdateService, type: :service do
       let(:dunning_campaign) { create(:dunning_campaign) }
 
       let(:organization) do
-        create(:organization, premium_integrations: ["auto_dunning"])
+        create(:organization)
       end
 
       let(:account_type) { "partner" }
@@ -80,9 +80,7 @@ RSpec.describe Customers::UpdateService, type: :service do
     end
 
     context 'with premium features' do
-      around { |test| lago_premium!(&test) }
-
-      let(:update_args) do
+        let(:update_args) do
         {
           id: customer.id,
           name: "Updated customer name",
@@ -107,10 +105,6 @@ RSpec.describe Customers::UpdateService, type: :service do
       end
 
       context "when revenue_share feature is enabled and updates account_type to partner" do
-        let(:organization) do
-          create(:organization, premium_integrations: %w[revenue_share auto_dunning])
-        end
-
         let(:customer) do
           create(
             :customer,
@@ -356,7 +350,6 @@ RSpec.describe Customers::UpdateService, type: :service do
         }
       end
 
-      around { |test| lago_premium!(&test) }
       before { stripe_customer }
 
       it 'updates only the updated args' do
@@ -542,7 +535,7 @@ RSpec.describe Customers::UpdateService, type: :service do
         end
 
         let(:organization) do
-          create(:organization, premium_integrations: ["auto_dunning"])
+          create(:organization)
         end
 
         let(:membership) { create(:membership, organization: organization) }
@@ -551,9 +544,7 @@ RSpec.describe Customers::UpdateService, type: :service do
           {applied_dunning_campaign_id: dunning_campaign.id}
         end
 
-        around { |test| lago_premium!(&test) }
-
-        it "updates auto dunning config" do
+            it "updates auto dunning config" do
           expect { customers_service.call }
             .to change(customer, :applied_dunning_campaign_id).to(dunning_campaign.id)
             .and change(customer, :exclude_from_dunning_campaign).to(false)

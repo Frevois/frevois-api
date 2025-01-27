@@ -27,8 +27,6 @@ describe 'Adjusted Subscription Fees Scenario', :scenarios, type: :request, tran
     )
   end
 
-  around { |test| lago_premium!(&test) }
-
   context 'with adjusted units' do
     it 'creates invoices correctly' do
       # NOTE: Jul 19th: create the subscription

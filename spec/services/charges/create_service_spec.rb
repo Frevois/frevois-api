@@ -65,9 +65,7 @@ RSpec.describe Charges::CreateService, type: :service do
       end
 
       context 'with premium license' do
-        around { |test| lago_premium!(&test) }
-
-        it 'saves premium charge model' do
+            it 'saves premium charge model' do
           create_service.call
 
           expect(plan.reload.charges.graduated_percentage.first).to have_attributes(
@@ -145,9 +143,7 @@ RSpec.describe Charges::CreateService, type: :service do
         end
 
         context 'when premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'saves premium attributes' do
+                it 'saves premium attributes' do
             create_service.call
 
             stored_charge = plan.reload.charges.first

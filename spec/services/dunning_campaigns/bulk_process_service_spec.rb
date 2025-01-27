@@ -8,7 +8,7 @@ RSpec.describe DunningCampaigns::BulkProcessService, type: :service, aggregate_f
   let(:currency) { "EUR" }
 
   context "when premium features are enabled" do
-    let(:organization) { create :organization, premium_integrations: %w[auto_dunning] }
+    let(:organization) { create :organization, }
     let(:customer) { create :customer, organization:, currency: }
 
     let(:invoice_1) do
@@ -32,8 +32,6 @@ RSpec.describe DunningCampaigns::BulkProcessService, type: :service, aggregate_f
         total_amount_cents: 1_00
       )
     end
-
-    around { |test| lago_premium!(&test) }
 
     context "when organization has an applied dunning campaign" do
       let(:dunning_campaign) { create :dunning_campaign, organization:, applied_to_organization: true }
@@ -63,15 +61,6 @@ RSpec.describe DunningCampaigns::BulkProcessService, type: :service, aggregate_f
           expect(DunningCampaigns::ProcessAttemptJob)
             .to have_been_enqueued
             .with(customer:, dunning_campaign_threshold:)
-        end
-
-        context "when organization does not have auto_dunning feature enabled" do
-          let(:organization) { create(:organization, premium_integrations: []) }
-
-          it "does not queue a job for the customer" do
-            result
-            expect(DunningCampaigns::ProcessAttemptJob).not_to have_been_enqueued
-          end
         end
 
         context "when maximum attempts are reached" do
@@ -290,15 +279,6 @@ RSpec.describe DunningCampaigns::BulkProcessService, type: :service, aggregate_f
           expect(DunningCampaigns::ProcessAttemptJob)
             .to have_been_enqueued
             .with(customer:, dunning_campaign_threshold:)
-        end
-
-        context "when organization does not have auto_dunning feature enabled" do
-          let(:organization) { create(:organization, premium_integrations: []) }
-
-          it "does not queue a job for the customer" do
-            result
-            expect(DunningCampaigns::ProcessAttemptJob).not_to have_been_enqueued
-          end
         end
 
         context "when maximum attempts are reached" do

@@ -293,9 +293,7 @@ RSpec.describe CreditNotes::CreateService, type: :service do
       end
 
       context 'with a valid license' do
-        around { |test| lago_premium!(&test) }
-
-        it 'returns a success' do
+            it 'returns a success' do
           result = create_service.call
           expect(result).to be_success
         end
@@ -480,9 +478,7 @@ RSpec.describe CreditNotes::CreateService, type: :service do
         fee
       end
 
-      around { |test| lago_premium!(&test) }
-
-      it 'Creates credit note and voids corresponding amount of credits from the wallet' do
+        it 'Creates credit note and voids corresponding amount of credits from the wallet' do
         result = create_service.call
 
         aggregate_failures do

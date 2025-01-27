@@ -47,8 +47,6 @@ RSpec.describe CreditNotes::EstimateService, type: :service do
     ]
   end
 
-  around { |test| lago_premium!(&test) }
-
   before do
     create(:fee_applied_tax, tax:, fee: fee1)
     create(:fee_applied_tax, tax:, fee: fee2)

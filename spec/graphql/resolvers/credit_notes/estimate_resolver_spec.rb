@@ -51,8 +51,6 @@ RSpec.describe Resolvers::CreditNotes::EstimateResolver, type: :graphql do
 
   let(:credit) { create(:credit, invoice:, applied_coupon:, amount_cents: 100) }
 
-  around { |test| lago_premium!(&test) }
-
   before { credit }
 
   it_behaves_like 'requires current user'

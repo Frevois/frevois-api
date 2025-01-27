@@ -18,7 +18,6 @@ module CreditNotes
 
     def call
       return result.not_found_failure!(resource: 'invoice') unless invoice
-      return result.forbidden_failure! unless should_create_credit_note?
       return result.not_allowed_failure!(code: 'invalid_type_or_status') unless valid_type_or_status?
 
       ActiveRecord::Base.transaction do
@@ -95,14 +94,6 @@ module CreditNotes
 
     delegate :credit_note, to: :result
     delegate :customer, to: :invoice
-
-    def should_create_credit_note?
-      # NOTE: created from subscription termination
-      return true if automatic
-
-      # NOTE: credit note is a premium feature
-      License.premium?
-    end
 
     def valid_type_or_status?
       return true if automatic

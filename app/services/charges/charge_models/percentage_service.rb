@@ -117,8 +117,6 @@ module Charges
       end
 
       def should_apply_min_max?
-        return false unless License.premium?
-
         per_transaction_max_amount? || per_transaction_min_amount?
       end
 

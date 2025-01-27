@@ -255,9 +255,7 @@ RSpec.describe Charges::ChargeModels::PercentageService, type: :service do
     end
 
     context 'when premium' do
-      around { |test| lago_premium!(&test) }
-
-      it 'applies the min and max per transaction' do
+        it 'applies the min and max per transaction' do
         # 1.75 (min as 100 * 0.01 < 1.75) + 10 + 12 (max as 10000 * 0.01 > 12)
         expect(apply_percentage_service.amount).to eq(23.75)
       end

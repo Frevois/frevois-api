@@ -76,7 +76,6 @@ module Invoices
     end
 
     def should_deliver_email?
-      License.premium? &&
         invoice.organization.email_settings.include?('invoice.finalized')
     end
 

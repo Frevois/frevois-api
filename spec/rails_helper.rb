@@ -58,7 +58,6 @@ RSpec.configure do |config|
   config.include AdminHelper, type: :request
   config.include ApiHelper, type: :request
   config.include ScenariosHelper
-  config.include LicenseHelper
   config.include PdfHelper
   config.include QueuesHelper
   config.include ActiveSupport::Testing::TimeHelpers

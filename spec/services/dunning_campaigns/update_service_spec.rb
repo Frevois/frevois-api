@@ -32,9 +32,7 @@ RSpec.describe DunningCampaigns::UpdateService, type: :service do
     end
 
     context "when lago premium" do
-      around { |test| lago_premium!(&test) }
-
-      context "when no auto_dunning premium integration" do
+        context "when no auto_dunning premium integration" do
         it 'returns an error' do
           expect(result).not_to be_success
           expect(result.error).to be_a(BaseService::ForbiddenFailure)
@@ -47,7 +45,7 @@ RSpec.describe DunningCampaigns::UpdateService, type: :service do
 
       context "when auto_dunning premium integration" do
         let(:organization) do
-          create(:organization, premium_integrations: ["auto_dunning"])
+          create(:organization)
         end
 
         let(:dunning_campaign_threshold) do

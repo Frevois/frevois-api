@@ -46,10 +46,7 @@ module Plans
 
         process_charges(plan, params[:charges]) if params[:charges]
 
-        if params.key?(:usage_thresholds) &&
-            License.premium? &&
-            plan.organization.premium_integrations.include?('progressive_billing')
-
+        if params.key?(:usage_thresholds)
           if params[:usage_thresholds].empty?
             plan.usage_thresholds.discard_all
           else
@@ -57,7 +54,7 @@ module Plans
           end
         end
 
-        process_minimum_commitment(plan, params[:minimum_commitment]) if params[:minimum_commitment] && License.premium?
+        process_minimum_commitment(plan, params[:minimum_commitment]) if params[:minimum_commitment]
 
         if old_amount_cents != plan.amount_cents
           process_downgraded_subscriptions

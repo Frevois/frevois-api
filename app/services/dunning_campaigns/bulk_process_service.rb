@@ -3,8 +3,6 @@
 module DunningCampaigns
   class BulkProcessService < BaseService
     def call
-      return result unless License.premium?
-
       eligible_customers.find_each do |customer|
         CustomerDunningEvaluator.call(customer)
       end
@@ -18,7 +16,6 @@ module DunningCampaigns
       Customer
         .joins(:organization)
         .where(exclude_from_dunning_campaign: false)
-        .where("organizations.premium_integrations @> ARRAY[?]::varchar[]", ['auto_dunning'])
     end
 
     class CustomerDunningEvaluator < BaseService

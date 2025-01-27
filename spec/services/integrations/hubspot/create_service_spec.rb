@@ -25,38 +25,9 @@ RSpec.describe Integrations::Hubspot::CreateService, type: :service do
       }
     end
 
-    context 'without premium license' do
-      it 'does not create an integration' do
-        expect { service_call }.not_to change(Integrations::HubspotIntegration, :count)
-      end
-
-      it 'returns an error' do
-        result = service_call
-
-        aggregate_failures do
-          expect(result).not_to be_success
-          expect(result.error).to be_a(BaseService::MethodNotAllowedFailure)
-        end
-      end
-    end
-
     context 'with premium license' do
-      around { |test| lago_premium!(&test) }
-
-      context 'with hubspot premium integration not present' do
-        it 'returns an error' do
-          result = service_call
-
-          aggregate_failures do
-            expect(result).not_to be_success
-            expect(result.error).to be_a(BaseService::MethodNotAllowedFailure)
-          end
-        end
-      end
-
       context 'with hubspot premium integration present' do
         before do
-          organization.update!(premium_integrations: ['hubspot'])
           allow(Integrations::Aggregator::SyncCustomObjectsAndPropertiesJob).to receive(:perform_later)
           allow(Integrations::Hubspot::SavePortalIdJob).to receive(:perform_later)
         end

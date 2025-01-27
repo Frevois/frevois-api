@@ -20,7 +20,7 @@ module Wallets
         if params.key?(:invoice_requires_successful_payment)
           wallet.invoice_requires_successful_payment = ActiveModel::Type::Boolean.new.cast(params[:invoice_requires_successful_payment])
         end
-        if params[:recurring_transaction_rules] && License.premium?
+        if params[:recurring_transaction_rules]
           Wallets::RecurringTransactionRules::UpdateService.call(wallet:, params: params[:recurring_transaction_rules])
         end
 

@@ -489,8 +489,6 @@ RSpec.describe Api::V1::CreditNotesController, type: :request do
       }
     end
 
-    around { |test| lago_premium!(&test) }
-
     include_examples 'requires API permission', 'credit_note', 'write'
 
     it 'creates a credit note' do
@@ -585,8 +583,6 @@ RSpec.describe Api::V1::CreditNotesController, type: :request do
         items: fees.map { |f| {fee_id: f.id, amount_cents: 50} }
       }
     end
-
-    around { |test| lago_premium!(&test) }
 
     include_examples 'requires API permission', 'credit_note', 'write'
 

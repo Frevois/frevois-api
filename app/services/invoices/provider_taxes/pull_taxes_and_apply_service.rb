@@ -75,8 +75,7 @@ module Invoices
       attr_accessor :invoice
 
       def should_deliver_email?
-        License.premium? &&
-          invoice.organization.email_settings.include?('invoice.finalized')
+        invoice.organization.email_settings.include?('invoice.finalized')
       end
 
       def wallet

@@ -11,8 +11,6 @@ module Wallets
       end
 
       def call
-        return unless License.premium?
-
         if method == 'fixed' && rule_params[:paid_credits].nil? && rule_params[:granted_credits].nil?
           paid_credits = wallet_params[:paid_credits]
           granted_credits = wallet_params[:granted_credits]

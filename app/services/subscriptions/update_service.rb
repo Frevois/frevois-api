@@ -18,7 +18,6 @@ module Subscriptions
       )
         return result
       end
-      return result.forbidden_failure! if !License.premium? && params.key?(:plan_overrides)
 
       subscription.name = params[:name] if params.key?(:name)
       subscription.ending_at = params[:ending_at] if params.key?(:ending_at)

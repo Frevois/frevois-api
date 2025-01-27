@@ -42,11 +42,7 @@ RSpec.describe IntegrationCustomers::CreateService, type: :service do
 
       let(:integration_customer) { IntegrationCustomers::BaseCustomer.last }
 
-      around { |test| lago_premium!(&test) }
-
-      before do
-        organization.update!(premium_integrations: ['netsuite'])
-
+        before do
         allow(Integrations::Aggregator::Contacts::CreateService)
           .to receive(:new).and_return(aggregator_contacts_create_service)
 
@@ -119,8 +115,6 @@ RSpec.describe IntegrationCustomers::CreateService, type: :service do
                 external_customer_id:
               }
             end
-
-            before { organization.update!(premium_integrations: ['anrok']) }
 
             it 'creates integration customer' do
               expect { service_call }.to change(IntegrationCustomers::AnrokCustomer, :count).by(1)

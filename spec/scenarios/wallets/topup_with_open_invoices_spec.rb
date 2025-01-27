@@ -6,8 +6,6 @@ describe "Wallet Transaction with invoice after payment", :scenarios, type: :req
   let(:organization) { create(:organization, webhook_url: nil) }
   let(:customer) { create(:customer, organization:) }
 
-  around { |test| lago_premium!(&test) }
-
   context "when the wallet does not require successful payment before invoicing" do
     it "allows wallet transaction to require successful payment" do
       create_wallet({

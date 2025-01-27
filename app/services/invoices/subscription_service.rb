@@ -138,8 +138,7 @@ module Invoices
     end
 
     def should_deliver_finalized_email?
-      License.premium? &&
-        customer.organization.email_settings.include?("invoice.finalized")
+      customer.organization.email_settings.include?("invoice.finalized")
     end
 
     def flag_lifetime_usage_for_refresh
@@ -154,8 +153,6 @@ module Invoices
 
     USAGE_TRACKABLE_REASONS = %i[subscription_periodic subscription_terminating].freeze
     def fill_daily_usage
-      return unless invoice.organization.premium_integrations.include?("revenue_analytics")
-
       subscriptions = invoice
         .invoice_subscriptions
         .select { |is| USAGE_TRACKABLE_REASONS.include?(is.invoicing_reason.to_sym) }

@@ -3187,7 +3187,6 @@ type CurrentOrganization {
   logoUrl: String
   name: String!
   netPaymentTerm: Int!
-  premiumIntegrations: [PremiumIntegrationTypeEnum!]!
   state: String
   stripePaymentProviders: [StripeProvider!]
   taxIdentificationNumber: String
@@ -3408,7 +3407,6 @@ type CustomerPortalCustomer {
   legalName: String
   legalNumber: String
   name: String
-  premium: Boolean!
   shippingAddress: CustomerAddress
   state: String
   taxIdentificationNumber: String
@@ -3424,7 +3422,6 @@ type CustomerPortalOrganization {
   id: ID!
   logoUrl: String
   name: String!
-  premiumIntegrations: [PremiumIntegrationTypeEnum!]!
   timezone: TimezoneEnum
 }
 
@@ -4448,7 +4445,6 @@ enum IntegrationTypeEnum {
   revenue_share
   salesforce
   xero
-  zero_amount_fees
 }
 
 type Invite {
@@ -6420,20 +6416,6 @@ input PlanOverridesInput {
   taxCodes: [String!]
   trialPeriod: Float
   usageThresholds: [UsageThresholdOverridesInput!]
-}
-
-enum PremiumIntegrationTypeEnum {
-  api_permissions
-  auto_dunning
-  hubspot
-  netsuite
-  okta
-  progressive_billing
-  revenue_analytics
-  revenue_share
-  salesforce
-  xero
-  zero_amount_fees
 }
 
 type Properties {
@@ -8821,7 +8803,6 @@ type User {
   id: ID!
   memberships: [Membership!]!
   organizations: [Organization!]!
-  premium: Boolean!
   updatedAt: ISO8601DateTime!
 }
 

@@ -16,8 +16,6 @@ describe 'Coupons breakdown Spec', :scenarios, type: :request do
     allow(pdf_generator).to receive(:call).and_return(pdf_result)
   end
 
-  around { |test| lago_premium!(&test) }
-
   context 'when there are multiple subscriptions and coupons of different kinds' do
     it 'creates an invoice for the expected period' do
       create_metric(name: 'Name', code: 'bm1', aggregation_type: 'sum_agg', field_name: 'total1')

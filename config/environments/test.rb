@@ -37,7 +37,6 @@ Rails.application.configure do
   config.active_support.disallowed_deprecation_warnings = []
 
   config.active_job.queue_adapter = :test
-  config.license_url = 'http://license.lago'
 
   Dotenv.load
 

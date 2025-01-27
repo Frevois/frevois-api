@@ -134,8 +134,6 @@ RSpec.describe Mutations::Customers::Create, type: :graphql do
   end
 
   context 'with premium feature' do
-    around { |test| lago_premium!(&test) }
-
     it 'creates a customer' do
       stripe_provider
 

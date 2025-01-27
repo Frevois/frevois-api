@@ -10,9 +10,7 @@ RSpec.describe Api::V1::Analytics::InvoicedUsagesController, type: :request do #
     let(:organization) { create(:organization) }
 
     context 'when license is premium' do
-      around { |test| lago_premium!(&test) }
-
-      include_examples 'requires API permission', 'analytic', 'read'
+        include_examples 'requires API permission', 'analytic', 'read'
 
       it 'returns the invoiced usage' do
         subject
@@ -22,13 +20,6 @@ RSpec.describe Api::V1::Analytics::InvoicedUsagesController, type: :request do #
 
           expect(json[:invoiced_usages]).to eq([])
         end
-      end
-    end
-
-    context 'when license is not premium' do
-      it 'returns forbidden status' do
-        subject
-        expect(response).to have_http_status(:forbidden)
       end
     end
   end

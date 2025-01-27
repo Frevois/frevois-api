@@ -99,9 +99,7 @@ RSpec.describe Organizations::UpdateService do
     end
 
     context 'with premium features' do
-      around { |test| lago_premium!(&test) }
-
-      let(:timezone) { 'Europe/Paris' }
+        let(:timezone) { 'Europe/Paris' }
       let(:email_settings) { ['invoice.finalized'] }
 
       it 'updates the organization' do

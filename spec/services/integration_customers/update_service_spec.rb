@@ -44,11 +44,7 @@ RSpec.describe IntegrationCustomers::UpdateService, type: :service do
         instance_double(Integrations::Aggregator::Contacts::UpdateService)
       end
 
-      around { |test| lago_premium!(&test) }
-
       before do
-        organization.update!(premium_integrations: ['netsuite'])
-
         integration_customer
 
         allow(Integrations::Aggregator::Contacts::UpdateService)

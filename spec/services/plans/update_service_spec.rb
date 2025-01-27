@@ -203,12 +203,7 @@ RSpec.describe Plans::UpdateService, type: :service do
       end
 
       context 'with premium license' do
-        around { |test| lago_premium!(&test) }
-
         context 'when progressive billing premium integration is present' do
-          before do
-            plan.organization.update!(premium_integrations: ['progressive_billing'])
-          end
 
           context 'when thresholds args are passed' do
             before do
@@ -270,26 +265,8 @@ RSpec.describe Plans::UpdateService, type: :service do
 
       let(:updated_plan) { plans_service.call.plan }
 
-      context 'without premium license' do
-        it 'does not create progressive billing thresholds' do
-          expect(usage_thresholds.count).to eq(0)
-        end
-      end
-
       context 'with premium license' do
-        around { |test| lago_premium!(&test) }
-
-        context 'when progressive billing premium integration is not present' do
-          it 'does not create progressive billing thresholds' do
-            expect(usage_thresholds.count).to eq(0)
-          end
-        end
-
         context 'when progressive billing premium integration is present' do
-          before do
-            plan.organization.update!(premium_integrations: ['progressive_billing'])
-          end
-
           context 'when thresholds args are passed' do
             before do
               update_args[:usage_thresholds] = usage_thresholds_args
@@ -546,9 +523,7 @@ RSpec.describe Plans::UpdateService, type: :service do
         end
 
         context 'when premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'saves premium charge model' do
+                it 'saves premium charge model' do
             plans_service.call
 
             expect(plan.charges.graduated_percentage.first).to have_attributes(
@@ -581,9 +556,7 @@ RSpec.describe Plans::UpdateService, type: :service do
         before { update_args.merge!({minimum_commitment: minimum_commitment_args}) }
 
         context 'when license is premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'creates minimum commitment' do
+                it 'creates minimum commitment' do
             result = plans_service.call
             commitment = result.plan.minimum_commitment
 
@@ -593,29 +566,11 @@ RSpec.describe Plans::UpdateService, type: :service do
             end
           end
         end
-
-        context 'when license is not premium' do
-          it 'does not create minimum commitment' do
-            result = plans_service.call
-
-            expect(result.plan.minimum_commitment).to be_nil
-          end
-        end
       end
 
       context 'when minimum commitment arguments are not present' do
         context 'when license is premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'does not create minimum commitment' do
-            result = plans_service.call
-
-            expect(result.plan.minimum_commitment).to be_nil
-          end
-        end
-
-        context 'when license is not premium' do
-          it 'does not create minimum commitment' do
+                it 'does not create minimum commitment' do
             result = plans_service.call
 
             expect(result.plan.minimum_commitment).to be_nil
@@ -627,17 +582,7 @@ RSpec.describe Plans::UpdateService, type: :service do
         before { update_args.merge!({minimum_commitment: {}}) }
 
         context 'when license is premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'does not create minimum commitment' do
-            result = plans_service.call
-
-            expect(result.plan.minimum_commitment).to be_nil
-          end
-        end
-
-        context 'when license is not premium' do
-          it 'does not create minimum commitment' do
+                it 'does not create minimum commitment' do
             result = plans_service.call
 
             expect(result.plan.minimum_commitment).to be_nil
@@ -655,20 +600,10 @@ RSpec.describe Plans::UpdateService, type: :service do
         before { update_args.merge!({minimum_commitment: minimum_commitment_args}) }
 
         context 'when license is premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'updates minimum commitment' do
+                it 'updates minimum commitment' do
             result = plans_service.call
 
             expect(result.plan.minimum_commitment.amount_cents).to eq(minimum_commitment_args[:amount_cents])
-          end
-        end
-
-        context 'when license is not premium' do
-          it 'does not update minimum commitment' do
-            result = plans_service.call
-
-            expect(result.plan.minimum_commitment.amount_cents).not_to eq(update_args[:amount_cents])
           end
         end
       end
@@ -681,9 +616,7 @@ RSpec.describe Plans::UpdateService, type: :service do
         before { update_args.merge!({minimum_commitment: minimum_commitment_args}) }
 
         context 'when license is premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'does not update minimum commitment args that are not present' do
+                it 'does not update minimum commitment args that are not present' do
             result = plans_service.call
 
             aggregate_failures do
@@ -692,30 +625,11 @@ RSpec.describe Plans::UpdateService, type: :service do
             end
           end
         end
-
-        context 'when license is not premium' do
-          it 'does not update minimum commitment' do
-            result = plans_service.call
-
-            expect(result.plan.minimum_commitment.invoice_display_name).to eq(minimum_commitment.invoice_display_name)
-            expect(result.plan.minimum_commitment.amount_cents).to eq(minimum_commitment.amount_cents)
-          end
-        end
       end
 
       context 'when minimum commitment arguments are not present' do
         context 'when license is premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'does not update minimum commitment' do
-            result = plans_service.call
-
-            expect(result.plan.minimum_commitment.amount_cents).not_to eq(update_args[:amount_cents])
-          end
-        end
-
-        context 'when license is not premium' do
-          it 'does not update minimum commitment' do
+                it 'does not update minimum commitment' do
             result = plans_service.call
 
             expect(result.plan.minimum_commitment.amount_cents).not_to eq(update_args[:amount_cents])
@@ -727,20 +641,10 @@ RSpec.describe Plans::UpdateService, type: :service do
         before { update_args.merge!({minimum_commitment: {}}) }
 
         context 'when license is premium' do
-          around { |test| lago_premium!(&test) }
-
-          it 'deletes plan minimum commitment' do
+                it 'deletes plan minimum commitment' do
             result = plans_service.call
 
             expect(result.plan.minimum_commitment).to be_nil
-          end
-        end
-
-        context 'when license is not premium' do
-          it 'does not delete minimum commitment' do
-            result = plans_service.call
-
-            expect(result.plan.minimum_commitment).not_to be_nil
           end
         end
       end
@@ -839,9 +743,7 @@ RSpec.describe Plans::UpdateService, type: :service do
       end
 
       context 'when premium' do
-        around { |test| lago_premium!(&test) }
-
-        it 'saves premium attributes' do
+            it 'saves premium attributes' do
           plans_service.call
 
           expect(existing_charge.reload).to have_attributes(pay_in_advance: true, invoiceable: false)

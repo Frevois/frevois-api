@@ -40,9 +40,7 @@ RSpec.describe Charges::OverrideService, type: :service do
     end
 
     context 'when lago premium' do
-      around { |test| lago_premium!(&test) }
-
-      it 'creates a charge based on the given charge', :aggregate_failures do
+        it 'creates a charge based on the given charge', :aggregate_failures do
         applied_tax = create(:charge_applied_tax, charge:)
 
         expect(charge.taxes).to contain_exactly(applied_tax.tax)

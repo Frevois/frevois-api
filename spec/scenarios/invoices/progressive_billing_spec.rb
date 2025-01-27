@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Progressive billing invoices', :scenarios, type: :request do
-  let(:organization) { create(:organization, webhook_url: nil, email_settings: [], premium_integrations: ['progressive_billing']) }
+  let(:organization) { create(:organization, webhook_url: nil, email_settings: []) }
   let(:plan) { create(:plan, organization: organization, interval: 'monthly', amount_cents: 31_00, pay_in_advance: false) }
   let(:upgrade_plan) { create(:plan, organization: organization, interval: 'monthly', amount_cents: 62_000, pay_in_advance: false) }
   let(:downgrade_plan) { create(:plan, organization: organization, interval: 'monthly', amount_cents: 31, pay_in_advance: false) }
@@ -17,8 +17,6 @@ describe 'Progressive billing invoices', :scenarios, type: :request do
     usage_threshold
     charge
   end
-
-  around { |test| lago_premium!(&test) }
 
   def ingest_event(subscription, amount)
     create_event({

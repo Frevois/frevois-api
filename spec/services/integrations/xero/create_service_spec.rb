@@ -21,25 +21,8 @@ RSpec.describe Integrations::Xero::CreateService, type: :service do
       }
     end
 
-    context 'without premium license' do
-      it 'does not create an integration' do
-        expect { service_call }.not_to change(Integrations::XeroIntegration, :count)
-      end
-
-      it 'returns an error' do
-        result = service_call
-
-        aggregate_failures do
-          expect(result).not_to be_success
-          expect(result.error).to be_a(BaseService::MethodNotAllowedFailure)
-        end
-      end
-    end
-
     context 'with premium license' do
-      around { |test| lago_premium!(&test) }
-
-      context 'when xero premium integration is not present' do
+        context 'when xero premium integration is not present' do
         it 'returns an error' do
           result = service_call
 
@@ -51,10 +34,6 @@ RSpec.describe Integrations::Xero::CreateService, type: :service do
       end
 
       context 'when xero premium integration is present' do
-        before do
-          organization.update!(premium_integrations: ['xero'])
-        end
-
         context 'without validation errors' do
           it 'creates an integration' do
             expect { service_call }.to change(Integrations::XeroIntegration, :count).by(1)

@@ -48,8 +48,6 @@ Rails.application.configure do
     exclude: ->(request) { request.path == "/health" }
   }
 
-  config.license_url = 'http://license-staging-web.default.svc.cluster.local'
-
   if ENV['LAGO_MEMCACHE_SERVERS'].present?
     config.cache_store = :mem_cache_store, ENV['LAGO_MEMCACHE_SERVERS'].split(',')
 

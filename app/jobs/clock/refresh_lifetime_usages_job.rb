@@ -15,9 +15,7 @@ module Clock
     unique :until_executed, on_conflict: :log
 
     def perform
-      return unless License.premium?
-
-      LifetimeUsage.joins(:organization).merge(Organization.with_progressive_billing_support).needs_recalculation.find_each do |ltu|
+      LifetimeUsage.joins(:organization).needs_recalculation.find_each do |ltu|
         LifetimeUsages::RecalculateAndCheckJob.perform_later(ltu)
       end
     end

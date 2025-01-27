@@ -38,9 +38,7 @@ module Plans
           taxes_result.raise_if_error!
         end
 
-        if args[:usage_thresholds].present? &&
-            License.premium? &&
-            plan.organization.premium_integrations.include?('progressive_billing')
+        if args[:usage_thresholds].present?
           args[:usage_thresholds].each do |threshold_args|
             create_usage_threshold(plan, threshold_args)
           end
@@ -57,7 +55,7 @@ module Plans
           end
         end
 
-        if args[:minimum_commitment].present? && License.premium?
+        if args[:minimum_commitment].present?
           minimum_commitment = args[:minimum_commitment]
           new_commitment = create_commitment(plan, minimum_commitment, :minimum_commitment)
           if minimum_commitment[:tax_codes].present?
@@ -125,11 +123,9 @@ module Plans
         ).raise_if_error!
       end
 
-      if License.premium?
-        charge.invoiceable = args[:invoiceable] unless args[:invoiceable].nil?
-        charge.regroup_paid_fees = args[:regroup_paid_fees] if args.key?(:regroup_paid_fees)
-        charge.min_amount_cents = args[:min_amount_cents] || 0
-      end
+      charge.invoiceable = args[:invoiceable] unless args[:invoiceable].nil?
+      charge.regroup_paid_fees = args[:regroup_paid_fees] if args.key?(:regroup_paid_fees)
+      charge.min_amount_cents = args[:min_amount_cents] || 0
 
       charge.save!
       charge
@@ -137,7 +133,6 @@ module Plans
 
     def charge_model(args)
       model = args[:charge_model]&.to_sym
-      return if model == :graduated_percentage && !License.premium?
 
       model
     end

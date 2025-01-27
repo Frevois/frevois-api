@@ -204,31 +204,6 @@ RSpec.describe Organization, type: :model do
     end
   end
 
-  describe 'Premium integrations scopes' do
-    it "returns the organization if the premium integration is enabled" do
-      Organization::PREMIUM_INTEGRATIONS.each do |integration|
-        expect(described_class.send("with_#{integration}_support")).to be_empty
-        organization.update!(premium_integrations: [integration])
-        expect(described_class.send("with_#{integration}_support")).to eq([organization])
-        organization.update!(premium_integrations: [])
-      end
-    end
-
-    it "does not return the organization for another premium integration" do
-      organization.update!(premium_integrations: ['progressive_billing'])
-      expect(described_class.with_okta_support).to be_empty
-      expect(described_class.with_progressive_billing_support).to eq([organization])
-    end
-  end
-
-  describe "#auto_dunning_enabled?" do
-    it_behaves_like "organization premium feature", "auto_dunning"
-  end
-
-  describe "#revenue_share_enabled?" do
-    it_behaves_like "organization premium feature", "revenue_share"
-  end
-
   describe "#reset_customers_last_dunning_campaign_attempt" do
     let(:last_dunning_campaign_attempt_at) { 1.day.ago }
     let(:campaign) { create(:dunning_campaign, organization:) }

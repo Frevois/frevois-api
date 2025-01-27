@@ -114,18 +114,6 @@ RSpec.describe Fees::ChargeService do
             expect(result).to be_success
             expect(result.fees.count).to eq(0)
           end
-
-          context 'when organization as zero_amount_fees premium integration' do
-            before do
-              organization.update!(premium_integrations: ["zero_amount_fees"])
-            end
-
-            it "creates a fee" do
-              result = charge_subscription_service.call
-              expect(result).to be_success
-              expect(result.fees.count).to eq(1)
-            end
-          end
         end
 
         context "with events" do

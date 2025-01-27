@@ -10,8 +10,6 @@ module Plans
     end
 
     def call
-      return result.forbidden_failure! unless License.premium?
-
       ActiveRecord::Base.transaction do
         new_plan = plan.dup.tap do |p|
           p.amount_cents = params[:amount_cents] if params.key?(:amount_cents)
@@ -36,14 +34,11 @@ module Plans
           Charges::OverrideService.call(charge:, params: charge_params)
         end
 
-        if params[:usage_thresholds].present? &&
-            License.premium? &&
-            plan.organization.premium_integrations.include?('progressive_billing')
-
+        if params[:usage_thresholds].present?
           UsageThresholds::OverrideService.call(usage_thresholds_params: params[:usage_thresholds], new_plan: new_plan)
         end
 
-        if params[:minimum_commitment].present? && License.premium?
+        if params[:minimum_commitment].present?
           commitment = Commitment.new(plan: new_plan, commitment_type: 'minimum_commitment')
           minimum_commitment_params = params[:minimum_commitment].merge(plan_id: new_plan.id)
 
