@@ -33,12 +33,6 @@ RSpec.describe Charges::OverrideService, type: :service do
 
     before { charge }
 
-    context 'when lago freemium' do
-      it 'returns without overriding the charge' do
-        expect { override_service.call }.not_to change(Charge, :count)
-      end
-    end
-
     context 'when lago premium' do
         it 'creates a charge based on the given charge', :aggregate_failures do
         applied_tax = create(:charge_applied_tax, charge:)

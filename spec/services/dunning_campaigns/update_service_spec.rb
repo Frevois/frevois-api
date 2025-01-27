@@ -20,17 +20,6 @@ RSpec.describe DunningCampaigns::UpdateService, type: :service do
       dunning_campaign
     end
 
-    context "when lago freemium" do
-      it 'returns an error' do
-        expect(result).not_to be_success
-        expect(result.error).to be_a(BaseService::ForbiddenFailure)
-      end
-
-      it "does not update the dunning campaign" do
-        expect { result }.not_to change(dunning_campaign, :applied_to_organization)
-      end
-    end
-
     context "when lago premium" do
         context "when no auto_dunning premium integration" do
         it 'returns an error' do

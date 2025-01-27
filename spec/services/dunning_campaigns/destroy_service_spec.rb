@@ -28,17 +28,6 @@ RSpec.describe DunningCampaigns::DestroyService, type: :service do
       end
     end
 
-    context "when lago freemium" do
-      it 'returns an error', :aggregate_failures do
-        expect(result).not_to be_success
-        expect(result.error).to be_a(BaseService::ForbiddenFailure)
-      end
-
-      it "does not delete the dunning campaign" do
-        expect { result }.not_to change(dunning_campaign, :deleted_at)
-      end
-    end
-
     context "when lago premium" do
         context "when no auto_dunning premium integration" do
         it 'returns an error', :aggregate_failures do

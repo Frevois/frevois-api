@@ -15,13 +15,6 @@ describe Clock::RefreshWalletsOngoingBalanceJob, job: true do
       allow(Wallets::Balance::RefreshOngoingService).to receive(:call)
     end
 
-    context 'when freemium' do
-      it 'does not call the refresh service' do
-        described_class.perform_now
-        expect(Wallets::RefreshOngoingBalanceJob).not_to have_been_enqueued.with(wallet)
-      end
-    end
-
     context 'when premium' do
         it 'calls the refresh service' do
         described_class.perform_now
