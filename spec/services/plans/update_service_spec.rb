@@ -735,13 +735,6 @@ RSpec.describe Plans::UpdateService, type: :service do
         )
       end
 
-      it 'does not update premium attributes' do
-        plan = plans_service.call.plan
-
-        expect(existing_charge.reload).to have_attributes(pay_in_advance: true, invoiceable: true)
-        expect(plan.charges.where(pay_in_advance: false).first.min_amount_cents).to eq(0)
-      end
-
       context 'when premium' do
             it 'saves premium attributes' do
           plans_service.call

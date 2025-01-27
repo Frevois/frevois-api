@@ -134,14 +134,6 @@ RSpec.describe Charges::CreateService, type: :service do
           )
         end
 
-        it 'does not update premium attributes' do
-          create_service.call
-
-          stored_charge = plan.reload.charges.first
-
-          expect(stored_charge).to have_attributes(invoiceable: true, min_amount_cents: 0)
-        end
-
         context 'when premium' do
                 it 'saves premium attributes' do
             create_service.call

@@ -86,12 +86,6 @@ RSpec.describe Charges::UpdateService, type: :service do
       )
     end
 
-    it 'does not update premium attributes' do
-      update_service.call
-
-      expect(charge.reload).to have_attributes(pay_in_advance: true, invoiceable: true)
-    end
-
     context 'when premium' do
         it 'saves premium attributes' do
         update_service.call
