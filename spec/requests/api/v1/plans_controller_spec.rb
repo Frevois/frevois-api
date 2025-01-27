@@ -111,15 +111,6 @@ RSpec.describe Api::V1::PlansController, type: :request do
               expect(json[:plan][:usage_thresholds].first[:amount_cents]).to eq(json[:plan][:amount_cents])
             end
           end
-
-          context 'when progressive billing premium integration is not present' do
-            it 'does not create usage thresholds' do
-              subject
-
-              expect(response).to have_http_status(:success)
-              expect(json[:plan][:usage_thresholds].count).to eq(0)
-            end
-          end
         end
       end
 

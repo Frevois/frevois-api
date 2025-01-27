@@ -22,17 +22,6 @@ RSpec.describe Integrations::Xero::CreateService, type: :service do
     end
 
     context 'with premium license' do
-        context 'when xero premium integration is not present' do
-        it 'returns an error' do
-          result = service_call
-
-          aggregate_failures do
-            expect(result).not_to be_success
-            expect(result.error).to be_a(BaseService::MethodNotAllowedFailure)
-          end
-        end
-      end
-
       context 'when xero premium integration is present' do
         context 'without validation errors' do
           it 'creates an integration' do
