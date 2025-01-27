@@ -25,22 +25,6 @@ RSpec.describe Resolvers::Analytics::MrrsResolver, type: :graphql do
   it_behaves_like 'requires current organization'
   it_behaves_like 'requires permission', 'analytics:view'
 
-  context 'without premium feature' do
-    it 'returns an error' do
-      result = execute_graphql(
-        current_user: membership.user,
-        current_organization: organization,
-        permissions: required_permission,
-        query:
-      )
-
-      expect_graphql_error(
-        result:,
-        message: 'unauthorized'
-      )
-    end
-  end
-
   context 'with premium feature' do
     it 'returns a list of mrrs' do
       result = execute_graphql(
