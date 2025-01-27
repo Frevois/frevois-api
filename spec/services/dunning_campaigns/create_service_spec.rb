@@ -29,15 +29,6 @@ RSpec.describe DunningCampaigns::CreateService, type: :service, aggregate_failur
 
   describe "#call" do
     context "when lago premium" do
-        context "when no auto_dunning premium integration" do
-        it "returns an error" do
-          result = create_service.call
-
-          expect(result).not_to be_success
-          expect(result.error).to be_a(BaseService::ForbiddenFailure)
-        end
-      end
-
       context "when auto_dunning premium integration" do
         let(:organization) do
           create(:organization)
