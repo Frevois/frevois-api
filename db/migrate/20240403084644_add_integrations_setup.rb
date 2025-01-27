@@ -15,6 +15,6 @@ class AddIntegrationsSetup < ActiveRecord::Migration[7.0]
       t.index [:code, :organization_id], name: :index_integrations_on_code_and_organization_id, unique: true
     end
 
-    add_column :organizations, :string, array: true, null: false, default: []
+    add_column :organizations, :premium_integrations, :string, array: true, null: false, default: []
   end
 end
