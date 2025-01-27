@@ -199,6 +199,7 @@ end
 #  logo                         :string
 #  name                         :string           not null
 #  net_payment_term             :integer          default(0), not null
+#  premium_integrations         :string           default([]), not null, is an Array
 #  state                        :string
 #  tax_identification_number    :string
 #  timezone                     :string           default("UTC"), not null
