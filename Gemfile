@@ -94,6 +94,9 @@ gem "valvat", require: false
 # Data Export
 gem "csv", "~> 3.0"
 
+# Sorbet
+gem 'sorbet-runtime'
+
 gem "lago-expression", github: "getlago/lago-expression", glob: "expression-ruby/lago-expression.gemspec", tag: 'v0.1.2'
 
 group :development, :test, :staging do
@@ -117,6 +120,7 @@ group :development, :test do
   gem "rubocop-rspec", require: false
   gem "rubocop-thread_safety", require: false
   gem "awesome_print"
+  gem 'tapioca', require: false
 end
 
 group :test do
@@ -138,4 +142,7 @@ group :development do
   gem "uglifier"
 
   gem "ruby-lsp-rails", require: false
+  
+  
+  gem 'sorbet'
 end

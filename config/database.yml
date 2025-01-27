@@ -4,26 +4,26 @@ default: &default
 development:
   primary:
     <<: *default
-    host: db
+    host: localhost
     username: lago
     password: changeme
-    database: lago
+    database: lago_test
     port: 5432
     schema_search_path: 'public'
   events:
     <<: *default
-    host: db
+    host: localhost
     username: lago
     password: changeme
-    database: lago
+    database: lago_test
     port: 5432
   clickhouse:
     adapter: clickhouse
     database: default
-    host: clickhouse
+    host: localhost
     port: 8123
     username: default
-    password: default
+    password: ""
     migrations_paths: db/clickhouse_migrate
     debug: true
     database_tasks: <% if ENV['LAGO_CLICKHOUSE_MIGRATIONS_ENABLED'].present? %> true <% else %> false <% end %>

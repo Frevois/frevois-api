@@ -40,3 +40,5 @@ LAGO_VERSION
 **/.DS_Store
 .vscode
 .zed
+
+sorbet/rbi/hidden-definitions/errors.txt
