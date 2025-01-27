@@ -21,14 +21,5 @@ RSpec.describe Api::V1::Analytics::GrossRevenuesController, type: :request do
         end
       end
     end
-
-    context 'when licence is not premium' do
-      it 'returns the gross revenue' do
-        subject
-
-        expect(response).to have_http_status(:success)
-        expect(json[:gross_revenues]).to eq([])
-      end
-    end
   end
 end

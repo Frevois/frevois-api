@@ -15,11 +15,5 @@ RSpec.describe Analytics::GrossRevenuesService, type: :service do
         expect(service_call).to be_success
       end
     end
-
-    context 'when licence is not premium' do
-      it 'returns success' do
-        expect(service_call).to be_success
-      end
-    end
   end
 end

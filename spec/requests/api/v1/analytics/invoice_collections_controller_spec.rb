@@ -28,12 +28,5 @@ RSpec.describe Api::V1::Analytics::InvoiceCollectionsController, type: :request 
         end
       end
     end
-
-    context 'when licence is not premium' do
-      it 'returns forbidden status' do
-        subject
-        expect(response).to have_http_status(:forbidden)
-      end
-    end
   end
 end

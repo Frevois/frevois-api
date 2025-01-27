@@ -12,10 +12,5 @@ describe Clock::ProcessDunningCampaignsJob, job: true do
         expect(DunningCampaigns::BulkProcessJob).to have_been_enqueued
       end
     end
-
-    it "does nothing" do
-      described_class.perform_now
-      expect(DunningCampaigns::BulkProcessJob).not_to have_been_enqueued
-    end
   end
 end

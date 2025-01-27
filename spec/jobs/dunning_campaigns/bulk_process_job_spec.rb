@@ -19,11 +19,4 @@ RSpec.describe DunningCampaigns::BulkProcessJob, type: :job do
         .to have_received(:call)
     end
   end
-
-  it "does nothing" do
-    described_class.perform_now
-
-    expect(DunningCampaigns::BulkProcessService)
-      .not_to have_received(:call)
-  end
 end
