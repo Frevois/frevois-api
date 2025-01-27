@@ -13,7 +13,7 @@ module IntegrationCustomers
 
     def create
       # For Anrok real customer sync happens with the first document sync. In the meantime,
-      # integration customer object needs to be stored on Lago side
+      # integration customer object needs to be stored on Frevois side
       new_integration_customer = IntegrationCustomers::BaseCustomer.create!(
         integration:,
         customer:,

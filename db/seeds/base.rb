@@ -116,7 +116,7 @@ Charge.create_with(
           custom_field: 10
         },
         metadata: {
-          user_agent: 'Lago Python v0.1.5',
+          user_agent: 'Frevois Python v0.1.5',
           ip_address: Faker::Internet.ip_v4_address
         }
       )
@@ -134,7 +134,7 @@ Charge.create_with(
         created_at: time,
         code: count_metric.code,
         metadata: {
-          user_agent: 'Lago Python v0.1.5',
+          user_agent: 'Frevois Python v0.1.5',
           ip_address: Faker::Internet.ip_v4_address
         }
       )
@@ -155,7 +155,7 @@ Charge.create_with(
       code: sum_metric.code,
       properties: {},
       metadata: {
-        user_agent: 'Lago Python v0.1.5',
+        user_agent: 'Frevois Python v0.1.5',
         ip_address: Faker::Internet.ip_v4_address
       }
     )
@@ -175,7 +175,7 @@ Charge.create_with(
       code: 'foo',
       properties: {},
       metadata: {
-        user_agent: 'Lago Python v0.1.5',
+        user_agent: 'Frevois Python v0.1.5',
         ip_address: Faker::Internet.ip_v4_address
       }
     )
@@ -243,7 +243,7 @@ organization.customers.find_each do |customer|
         custom_field: 10
       },
       metadata: {
-        user_agent: 'Lago Python v0.1.5',
+        user_agent: 'Frevois Python v0.1.5',
         ip_address: Faker::Internet.ip_v4_address
       }
     )

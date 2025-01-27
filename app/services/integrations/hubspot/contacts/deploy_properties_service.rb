@@ -47,7 +47,7 @@ module Integrations
               {
                 groupName: "contactinformation",
                 name: "lago_customer_id",
-                label: "Lago Customer Id",
+                label: "Frevois Customer Id",
                 type: "string",
                 fieldType: "text",
                 displayOrder: -1,
@@ -58,7 +58,7 @@ module Integrations
               {
                 groupName: "contactinformation",
                 name: "lago_customer_external_id",
-                label: "Lago Customer External Id",
+                label: "Frevois Customer External Id",
                 type: "string",
                 fieldType: "text",
                 displayOrder: -1,
@@ -69,7 +69,7 @@ module Integrations
               {
                 groupName: "contactinformation",
                 name: "lago_billing_email",
-                label: "Lago Billing Email",
+                label: "Frevois Billing Email",
                 type: "string",
                 fieldType: "text",
                 searchableInGlobalSearch: true,
@@ -78,7 +78,7 @@ module Integrations
               {
                 groupName: "contactinformation",
                 name: "lago_customer_link",
-                label: "Lago Customer Link",
+                label: "Frevois Customer Link",
                 type: "string",
                 fieldType: "text",
                 searchableInGlobalSearch: true,

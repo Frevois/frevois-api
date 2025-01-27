@@ -68,7 +68,7 @@ module Integrations
             properties: [
               {
                 name: "lago_subscription_id",
-                label: "Lago Subscription Id",
+                label: "Frevois Subscription Id",
                 type: "string",
                 fieldType: "text",
                 hasUniqueValue: true,
@@ -76,68 +76,68 @@ module Integrations
               },
               {
                 name: "lago_external_subscription_id",
-                label: "Lago External Subscription Id",
+                label: "Frevois External Subscription Id",
                 type: "string",
                 fieldType: "text",
                 searchableInGlobalSearch: true
               },
               {
                 name: "lago_subscription_name",
-                label: "Lago Subscription Name",
+                label: "Frevois Subscription Name",
                 type: "string",
                 fieldType: "text"
               },
               {
                 name: "lago_subscription_plan_code",
-                label: "Lago Subscription Plan Code",
+                label: "Frevois Subscription Plan Code",
                 type: "string",
                 fieldType: "text"
               },
               {
                 name: "lago_subscription_status",
-                label: "Lago Subscription Status",
+                label: "Frevois Subscription Status",
                 type: "string",
                 fieldType: "text"
               },
               {
                 name: "lago_subscription_created_at",
-                label: "Lago Subscription Created At",
+                label: "Frevois Subscription Created At",
                 type: "date",
                 fieldType: "date"
               },
               {
                 name: "lago_subscription_started_at",
-                label: "Lago Subscription Started At",
+                label: "Frevois Subscription Started At",
                 type: "date",
                 fieldType: "date"
               },
               {
                 name: "lago_subscription_ending_at",
-                label: "Lago Subscription Ending At",
+                label: "Frevois Subscription Ending At",
                 type: "date",
                 fieldType: "date"
               },
               {
                 name: "lago_subscription_at",
-                label: "Lago Subscription At",
+                label: "Frevois Subscription At",
                 type: "date",
                 fieldType: "date"
               },
               {
                 name: "lago_subscription_terminated_at",
-                label: "Lago Subscription Terminated At",
+                label: "Frevois Subscription Terminated At",
                 type: "date",
                 fieldType: "date"
               },
               {
                 name: "lago_subscription_trial_ended_at",
-                label: "Lago Subscription Trial Ended At",
+                label: "Frevois Subscription Trial Ended At",
                 type: "date",
                 fieldType: "date"
               },
               {
                 name: "lago_billing_time",
-                label: "Lago Billing Time",
+                label: "Frevois Billing Time",
                 type: "enumeration",
                 fieldType: "radio",
                 displayOrder: -1,

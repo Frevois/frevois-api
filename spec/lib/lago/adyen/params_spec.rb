@@ -41,7 +41,7 @@ RSpec.describe Lago::Adyen::Params do
     context 'when params are present' do
       let(:params) do
         {
-          merchantAccount: 'Lago Account',
+          merchantAccount: 'Frevois Account',
           shopperReference: 'Lago123'
         }
       end

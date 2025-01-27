@@ -13,7 +13,7 @@ RSpec.describe ApiKeyMailer, type: :mailer do
     describe 'subject' do
       subject { mail.subject }
 
-      it { is_expected.to eq 'Your Lago API key has been rolled' }
+      it { is_expected.to eq 'Your Frevois API key has been rolled' }
     end
 
     describe 'recipients' do
@@ -47,7 +47,7 @@ RSpec.describe ApiKeyMailer, type: :mailer do
     describe 'subject' do
       subject { mail.subject }
 
-      it { is_expected.to eq 'A new Lago API key has been created' }
+      it { is_expected.to eq 'A new Frevois API key has been created' }
     end
 
     describe 'recipients' do
@@ -81,7 +81,7 @@ RSpec.describe ApiKeyMailer, type: :mailer do
     describe 'subject' do
       subject { mail.subject }
 
-      it { is_expected.to eq 'A Lago API key has been deleted' }
+      it { is_expected.to eq 'A Frevois API key has been deleted' }
     end
 
     describe 'recipients' do

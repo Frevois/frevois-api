@@ -6,4 +6,4 @@ This repository contains the backend API for Frevois.
 
 ## License
 
-Lago is distributed under [AGPL-3.0](LICENSE).
+Frevois is distributed under [AGPL-3.0](LICENSE).

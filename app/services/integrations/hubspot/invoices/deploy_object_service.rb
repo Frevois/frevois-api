@@ -56,7 +56,7 @@ module Integrations
         def payload
           {
             name: "LagoInvoices",
-            description: "Invoices issued by Lago billing engine",
+            description: "Invoices issued by Frevois billing engine",
             requiredProperties: [
               "lago_invoice_id"
             ],
@@ -70,7 +70,7 @@ module Integrations
             properties: [
               {
                 name: "lago_invoice_id",
-                label: "Lago Invoice Id",
+                label: "Frevois Invoice Id",
                 type: "string",
                 fieldType: "text",
                 hasUniqueValue: true,
@@ -78,26 +78,26 @@ module Integrations
               },
               {
                 name: "lago_invoice_number",
-                label: "Lago Invoice Number",
+                label: "Frevois Invoice Number",
                 type: "string",
                 fieldType: "text",
                 searchableInGlobalSearch: true
               },
               {
                 name: "lago_invoice_issuing_date",
-                label: "Lago Invoice Issuing Date",
+                label: "Frevois Invoice Issuing Date",
                 type: "date",
                 fieldType: "date"
               },
               {
                 name: "lago_invoice_payment_due_date",
-                label: "Lago Invoice Payment Due Date",
+                label: "Frevois Invoice Payment Due Date",
                 type: "date",
                 fieldType: "date"
               },
               {
                 name: "lago_invoice_payment_overdue",
-                label: "Lago Invoice Payment Overdue",
+                label: "Frevois Invoice Payment Overdue",
                 groupName: "LagoInvoices",
                 type: "bool",
                 fieldType: "booleancheckbox",
@@ -114,43 +114,43 @@ module Integrations
               },
               {
                 name: "lago_invoice_type",
-                label: "Lago Invoice Type",
+                label: "Frevois Invoice Type",
                 type: "string",
                 fieldType: "text"
               },
               {
                 name: "lago_invoice_status",
-                label: "Lago Invoice Status",
+                label: "Frevois Invoice Status",
                 type: "string",
                 fieldType: "text"
               },
               {
                 name: "lago_invoice_payment_status",
-                label: "Lago Invoice Payment Status",
+                label: "Frevois Invoice Payment Status",
                 type: "string",
                 fieldType: "text"
               },
               {
                 name: "lago_invoice_currency",
-                label: "Lago Invoice Currency",
+                label: "Frevois Invoice Currency",
                 type: "string",
                 fieldType: "text"
               },
               {
                 name: "lago_invoice_total_amount",
-                label: "Lago Invoice Total Amount",
+                label: "Frevois Invoice Total Amount",
                 type: "number",
                 fieldType: "number"
               },
               {
                 name: "lago_invoice_subtotal_excluding_taxes",
-                label: "Lago Invoice Subtotal Excluding Taxes",
+                label: "Frevois Invoice Subtotal Excluding Taxes",
                 type: "number",
                 fieldType: "number"
               },
               {
                 name: "lago_invoice_file_url",
-                label: "Lago Invoice File URL",
+                label: "Frevois Invoice File URL",
                 type: "string",
                 fieldType: "file"
               }

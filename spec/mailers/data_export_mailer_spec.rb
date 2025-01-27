@@ -17,13 +17,13 @@ RSpec.describe DataExportMailer, type: :mailer do
       context 'with invoice data export' do
         let(:data_export) { create(:data_export, :completed, resource_type: 'invoices') }
 
-        it { is_expected.to eq 'Your Lago invoices export is ready!' }
+        it { is_expected.to eq 'Your Frevois invoices export is ready!' }
       end
 
       context 'with invoice fee data export' do
         let(:data_export) { create(:data_export, :completed, resource_type: 'invoice_fees') }
 
-        it { is_expected.to eq 'Your Lago invoice fees export is ready!' }
+        it { is_expected.to eq 'Your Frevois invoice fees export is ready!' }
       end
     end
 
