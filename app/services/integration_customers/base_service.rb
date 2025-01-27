@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module IntegrationCustomers
-  class BaseService < BaseService
+  class BaseService < ::BaseService
     def initialize(params:, integration:)
       @params = params
       @integration = integration

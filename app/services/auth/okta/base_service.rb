@@ -2,7 +2,7 @@
 
 module Auth
   module Okta
-    class BaseService < BaseService
+    class BaseService < ::BaseService
       private
 
       def check_state

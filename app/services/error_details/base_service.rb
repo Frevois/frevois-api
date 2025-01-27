@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ErrorDetails
-  class BaseService < BaseService
+  class BaseService < ::BaseService
     def initialize(params:, owner:, organization:)
       @params = params
       @owner = owner

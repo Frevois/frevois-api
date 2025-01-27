@@ -2,7 +2,7 @@
 
 module PaymentProviders
   module Stripe
-    class BaseService < BaseService
+    class BaseService < PaymentProviders::BaseService
       def initialize(payment_provider)
         @payment_provider = payment_provider
 

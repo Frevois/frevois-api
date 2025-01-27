@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PaymentProviders
-  class BaseService < BaseService
+  class BaseService < ::BaseService
     private
 
     def payment_provider_code_changed?(payment_provider, old_code, args)

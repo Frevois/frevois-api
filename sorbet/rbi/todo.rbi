@@ -9,7 +9,6 @@ module ActiveStorageValidations::Matchers; end
 module BillableMetrics::Aggregations::BaseService::Result; end
 module BillableMetrics::ProratedAggregations::BaseService::Result; end
 module IntegrationCustomers::BaseService::ThrottlingError; end
-module Integrations::Aggregator::BaseService::FailedResult; end
 module Integrations::Aggregator::BaseService::ThrottlingError; end
 module Integrations::Aggregator::Invoices::BaseService::ThrottlingError; end
 module Integrations::Aggregator::Invoices::Hubspot::BaseService::ThrottlingError; end

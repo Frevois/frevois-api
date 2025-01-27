@@ -3,7 +3,7 @@
 module PaymentProviders
   module Stripe
     module Webhooks
-      class BaseService < BaseService
+      class BaseService < Stripe::BaseService
         def initialize(organization_id:, event:)
           @organization = Organization.find(organization_id)
           @event = event

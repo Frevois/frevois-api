@@ -3,7 +3,7 @@
 module PaymentProviders
   module Cashfree
     module Webhooks
-      class BaseService < BaseService
+      class BaseService < PaymentProviders::BaseService
         def initialize(organization_id:, event_json:)
           @organization = Organization.find(organization_id)
           @event_json = event_json

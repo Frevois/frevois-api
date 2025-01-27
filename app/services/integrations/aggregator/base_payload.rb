@@ -3,7 +3,7 @@
 module Integrations
   module Aggregator
     class BasePayload
-      class Failure < BaseService::FailedResult
+      class Failure < ::BaseService::FailedResult
         attr_reader :code
 
         def initialize(result, code:)
