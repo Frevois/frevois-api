@@ -67,7 +67,7 @@ module Process
   extend ::ConnectionPool::ForkTracker
   extend ::RedisClient::PIDCache::CoreExt
   extend ::FFI::ModernForkTracking
-  extend ::ActiveSupport::ForkTracker::ModernCoreExt
+  extend ::ActiveSupport::ForkTracker::CoreExt
 
   class << self
     # source://timecop//lib/timecop/time_extensions.rb#176

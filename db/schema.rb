@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_22_112050) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_28_095403) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
-  enable_extension "plpgsql"
   enable_extension "unaccent"
 
   # Custom types defined in this database.
@@ -1043,7 +1043,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_22_112050) do
     t.string "document_number_prefix"
     t.boolean "eu_tax_management", default: false
     t.boolean "clickhouse_aggregation", default: false, null: false
-    t.string "premium_integrations", default: [], null: false, array: true
     t.boolean "custom_aggregation", default: false
     t.boolean "finalize_zero_amount_invoice", default: true, null: false
     t.boolean "clickhouse_events_store", default: false, null: false

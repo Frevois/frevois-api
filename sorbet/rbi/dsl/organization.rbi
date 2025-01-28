@@ -1050,6 +1050,9 @@ class Organization
     def annotate(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def arel_columns(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def create_with(*args, &blk); end
 
     sig { params(value: T::Boolean).returns(PrivateAssociationRelation) }
@@ -1084,40 +1087,6 @@ class Organization
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def includes(*args, &blk); end
-
-    sig do
-      params(
-        attributes: Hash,
-        returning: T.nilable(T.any(T::Array[Symbol], FalseClass)),
-        unique_by: T.nilable(T.any(T::Array[Symbol], Symbol))
-      ).returns(ActiveRecord::Result)
-    end
-    def insert(attributes, returning: nil, unique_by: nil); end
-
-    sig do
-      params(
-        attributes: Hash,
-        returning: T.nilable(T.any(T::Array[Symbol], FalseClass))
-      ).returns(ActiveRecord::Result)
-    end
-    def insert!(attributes, returning: nil); end
-
-    sig do
-      params(
-        attributes: T::Array[Hash],
-        returning: T.nilable(T.any(T::Array[Symbol], FalseClass)),
-        unique_by: T.nilable(T.any(T::Array[Symbol], Symbol))
-      ).returns(ActiveRecord::Result)
-    end
-    def insert_all(attributes, returning: nil, unique_by: nil); end
-
-    sig do
-      params(
-        attributes: T::Array[Hash],
-        returning: T.nilable(T.any(T::Array[Symbol], FalseClass))
-      ).returns(ActiveRecord::Result)
-    end
-    def insert_all!(attributes, returning: nil); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def invert_where(*args, &blk); end
@@ -1213,24 +1182,6 @@ class Organization
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def unscope(*args, &blk); end
 
-    sig do
-      params(
-        attributes: Hash,
-        returning: T.nilable(T.any(T::Array[Symbol], FalseClass)),
-        unique_by: T.nilable(T.any(T::Array[Symbol], Symbol))
-      ).returns(ActiveRecord::Result)
-    end
-    def upsert(attributes, returning: nil, unique_by: nil); end
-
-    sig do
-      params(
-        attributes: T::Array[Hash],
-        returning: T.nilable(T.any(T::Array[Symbol], FalseClass)),
-        unique_by: T.nilable(T.any(T::Array[Symbol], Symbol))
-      ).returns(ActiveRecord::Result)
-    end
-    def upsert_all(attributes, returning: nil, unique_by: nil); end
-
     sig { returns(PrivateAssociationRelationWhereChain) }
     sig { params(args: T.untyped).returns(PrivateAssociationRelation) }
     def where(*args); end
@@ -1240,6 +1191,9 @@ class Organization
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def with_attached_logo(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def with_recursive(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def without(*args, &blk); end
@@ -2471,51 +2425,6 @@ class Organization
     sig { void }
     def net_payment_term_will_change!; end
 
-    sig { returns(T::Array[::String]) }
-    def premium_integrations; end
-
-    sig { params(value: T::Array[::String]).returns(T::Array[::String]) }
-    def premium_integrations=(value); end
-
-    sig { returns(T::Boolean) }
-    def premium_integrations?; end
-
-    sig { returns(T.nilable(T::Array[::String])) }
-    def premium_integrations_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def premium_integrations_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def premium_integrations_came_from_user?; end
-
-    sig { returns(T.nilable([T::Array[::String], T::Array[::String]])) }
-    def premium_integrations_change; end
-
-    sig { returns(T.nilable([T::Array[::String], T::Array[::String]])) }
-    def premium_integrations_change_to_be_saved; end
-
-    sig { params(from: T::Array[::String], to: T::Array[::String]).returns(T::Boolean) }
-    def premium_integrations_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { returns(T.nilable(T::Array[::String])) }
-    def premium_integrations_in_database; end
-
-    sig { returns(T.nilable([T::Array[::String], T::Array[::String]])) }
-    def premium_integrations_previous_change; end
-
-    sig { params(from: T::Array[::String], to: T::Array[::String]).returns(T::Boolean) }
-    def premium_integrations_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { returns(T.nilable(T::Array[::String])) }
-    def premium_integrations_previously_was; end
-
-    sig { returns(T.nilable(T::Array[::String])) }
-    def premium_integrations_was; end
-
-    sig { void }
-    def premium_integrations_will_change!; end
-
     sig { void }
     def restore_address_line1!; end
 
@@ -2596,9 +2505,6 @@ class Organization
 
     sig { void }
     def restore_net_payment_term!; end
-
-    sig { void }
-    def restore_premium_integrations!; end
 
     sig { void }
     def restore_state!; end
@@ -2782,12 +2688,6 @@ class Organization
 
     sig { returns(T::Boolean) }
     def saved_change_to_net_payment_term?; end
-
-    sig { returns(T.nilable([T::Array[::String], T::Array[::String]])) }
-    def saved_change_to_premium_integrations; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_premium_integrations?; end
 
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def saved_change_to_state; end
@@ -3183,9 +3083,6 @@ class Organization
     def will_save_change_to_net_payment_term?; end
 
     sig { returns(T::Boolean) }
-    def will_save_change_to_premium_integrations?; end
-
-    sig { returns(T::Boolean) }
     def will_save_change_to_state?; end
 
     sig { returns(T::Boolean) }
@@ -3261,6 +3158,9 @@ class Organization
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def annotate(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def arel_columns(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def create_with(*args, &blk); end
@@ -3403,6 +3303,9 @@ class Organization
     def with_attached_logo(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def with_recursive(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def without(*args, &blk); end
   end
 
@@ -3499,20 +3402,6 @@ class Organization
       ).returns(PrivateCollectionProxy)
     end
     def concat(*records); end
-
-    sig do
-      params(
-        records: T.any(::Organization, Integer, String, T::Enumerable[T.any(::Organization, Integer, String, T::Enumerable[::Organization])])
-      ).returns(T::Array[::Organization])
-    end
-    def delete(*records); end
-
-    sig do
-      params(
-        records: T.any(::Organization, Integer, String, T::Enumerable[T.any(::Organization, Integer, String, T::Enumerable[::Organization])])
-      ).returns(T::Array[::Organization])
-    end
-    def destroy(*records); end
 
     sig { returns(T::Array[::Organization]) }
     def load_target; end
