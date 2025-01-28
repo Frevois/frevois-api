@@ -97,7 +97,7 @@ gem "csv", "~> 3.0"
 # Sorbet
 gem 'sorbet-runtime'
 
-gem "lago-expression", github: "getlago/lago-expression", glob: "expression-ruby/lago-expression.gemspec", tag: 'v0.1.2'
+gem "lago-expression", github: "getlago/lago-expression", glob: "expression-ruby/lago-expression.gemspec", tag: 'v0.1.3'
 
 group :development, :test, :staging do
   gem "factory_bot_rails"
