@@ -25,6 +25,7 @@ module Currencies
     BOB: 'Bolivian Boliviano',
     BRL: 'Brazilian Real',
     BSD: 'Bahamian Dollar',
+    BTC: 'Bitcoin',
     BWP: 'Botswana Pula',
     BYN: 'Belarusian Ruble',
     BZD: 'Belize Dollar',

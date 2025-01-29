@@ -11122,6 +11122,12 @@
               "deprecationReason": null
             },
             {
+              "name": "BTC",
+              "description": "Bitcoin",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "BWP",
               "description": "Botswana Pula",
               "isDeprecated": false,

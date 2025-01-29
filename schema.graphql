@@ -2558,6 +2558,11 @@ enum CurrencyEnum {
   BSD
 
   """
+  Bitcoin
+  """
+  BTC
+
+  """
   Botswana Pula
   """
   BWP
